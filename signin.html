@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from nft-tailwind.preview.uideck.com/signin by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 07 Oct 2023 18:49:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>XRPL Naming Service - XNS</title>
+<link rel="icon" href="favicon.ico"><link href="style.css" rel="stylesheet"></head>
+<body class="be" x-data="
+      {
+        scrolledFromTop: false
+      }
+    " x-init="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false" @scroll.window="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false">
+
+<header x-data="
+        {
+          navbarOpen: false,
+          submenuOpen: false
+        }
+      " class="header g h za pb yc ce gi d" :class="scrolledFromTop ? 'y de re bi fi' : ' y' ">
+<div class="a">
+<div class="f aa za yc ad">
+<div class="qb bc nf">
+<a href="index.html" class="header-logo xa pb" :class="scrolledFromTop ? 'of hl' : 'pf il' ">
+<img src="src/images/logo.svg" alt="logo" class="bb bc" />
+</a>
+</div>
+<div class="za pb yc ad nf">
+<div>
+<button @click="navbarOpen = !navbarOpen " :class="navbarOpen && 'navbarTogglerActive' " id="navbarToggler" name="navbarToggler" aria-label="navbarToggler" class="e i j/2 xa nc kd qf rf ei hj yk">
+<span :class="navbarOpen && 'rc pc k' " class="f ba xa cb rb ee"></span>
+<span :class="navbarOpen && '_h' " class="f ba xa cb rb ee"></span>
+<span :class="navbarOpen && 'l qc' " class="f ba xa cb rb ee"></span>
+</button>
+<nav :class="!navbarOpen && 'ab' " id="navbarCollapse" class="e i m pb cc kd fe ci ok vk zk dl fl sf jl kl xl jm">
+<ul class="rm wk">
+<li class="ij f">
+<a href="index.html" class="ca za tf eh nh th lj rk xk ll ml">
+Home
+</a>
+</li>
+<li class="ij f">
+<a href="#" class="ca za tf eh nh th lj rk sk xk ll ml cm">
+Explore
+</a>
+</li>
+<li class="ij f">
+<a href="https://discord.com" target="_blank" rel="nofollow" class="ca za tf eh nh th lj rk sk xk ll ml cm">
+Community
+</a>
+</li>
+<!-- <li class="ij submenu-item f">
+<a href="javascript:void(0)" @click="submenuOpen = !submenuOpen" class="f ca za tf eh nh th li mi ni/2 oi pi qi ri si ti ui vi lj rk sk xk ll ol pl zl cm">
+Pages
+</a>
+<div :class="submenuOpen ? 'xa' : 'ab' " class="submenu f m h sb ld de cf hi ji nj nk pk qk vk wl yl _l am">
+<a href="explore-items.html" class="xa md uf nf fh oh th bj">
+Explore Items
+</a>
+<a href="item-details.html" class="xa md uf nf fh oh th bj">
+Item Details
+</a>
+<a href="create-item.html" class="xa md uf nf fh oh th bj">
+Create Item
+</a>
+<a href="connect-wallet.html" class="xa md uf nf fh oh th bj">
+Connect Wallet
+</a>
+<a href="support.html" class="xa md uf nf fh oh th bj">
+Support
+</a>
+<a href="signin.html" class="xa md uf nf fh oh th bj">
+Sign In Page
+</a>
+<a href="signup.html" class="xa md uf nf fh oh th bj">
+Sign Up Page
+</a>
+</div>
+</li> -->
+<li class="ij f">
+<a href="support.html" class="ca za tf eh nh th lj rk sk xk ll ml cm">
+Support
+</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class="ab zc hg qj ql">
+<div class="ij f ab gk">
+<button class="sf vf eh nh uh gi cj kl km" name="search" aria-label="search">
+<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.2917 3.25C12.1592 3.25 13.9503 3.99189 15.2709 5.31246C16.5914 6.63303 17.3333 8.4241 17.3333 10.2917C17.3333 12.0358 16.6942 13.6392 15.6433 14.8742L15.9358 15.1667H16.7917L22.2083 20.5833L20.5833 22.2083L15.1667 16.7917V15.9358L14.8742 15.6433C13.6392 16.6942 12.0358 17.3333 10.2917 17.3333C8.4241 17.3333 6.63303 16.5914 5.31246 15.2709C3.99189 13.9503 3.25 12.1592 3.25 10.2917C3.25 8.4241 3.99189 6.63303 5.31246 5.31246C6.63303 3.99189 8.4241 3.25 10.2917 3.25ZM10.2917 5.41667C7.58333 5.41667 5.41667 7.58333 5.41667 10.2917C5.41667 13 7.58333 15.1667 10.2917 15.1667C13 15.1667 15.1667 13 15.1667 10.2917C15.1667 7.58333 13 5.41667 10.2917 5.41667Z" fill="currentColor" />
+</svg>
+</button>
+<div class="c e n o sb ld de df _h ii jj kj nj">
+<form class="za">
+<input type="text" placeholder="Search here..." class="pb ce tf nf vh di" />
+<button class="vh" name="search-button" aria-label="search-button">
+<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.2917 3.25C12.1592 3.25 13.9503 3.99189 15.2709 5.31246C16.5914 6.63303 17.3333 8.4241 17.3333 10.2917C17.3333 12.0358 16.6942 13.6392 15.6433 14.8742L15.9358 15.1667H16.7917L22.2083 20.5833L20.5833 22.2083L15.1667 16.7917V15.9358L14.8742 15.6433C13.6392 16.6942 12.0358 17.3333 10.2917 17.3333C8.4241 17.3333 6.63303 16.5914 5.31246 15.2709C3.99189 13.9503 3.25 12.1592 3.25 10.2917C3.25 8.4241 3.99189 6.63303 5.31246 5.31246C6.63303 3.99189 8.4241 3.25 10.2917 3.25ZM10.2917 5.41667C7.58333 5.41667 5.41667 7.58333 5.41667 10.2917C5.41667 13 7.58333 15.1667 10.2917 15.1667C13 15.1667 15.1667 13 15.1667 10.2917C15.1667 7.58333 13 5.41667 10.2917 5.41667Z" fill="currentColor" />
+</svg>
+</button>
+</form>
+</div>
+</div>
+<a href="connect-wallet.html" class="za yc ld pd vd sf wf eh nh vh gi ji ki wi yi kl jm">
+<span class="ig">
+<svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.125 17.75V18.7083C20.125 19.2167 19.9231 19.7042 19.5636 20.0636C19.2042 20.4231 18.7167 20.625 18.2083 20.625H4.79167C3.72792 20.625 2.875 19.7625 2.875 18.7083V5.29167C2.875 4.78333 3.07693 4.29582 3.43638 3.93638C3.79582 3.57693 4.28334 3.375 4.79167 3.375H18.2083C18.7167 3.375 19.2042 3.57693 19.5636 3.93638C19.9231 4.29582 20.125 4.78333 20.125 5.29167V6.25H11.5C10.4363 6.25 9.58333 7.1125 9.58333 8.16667V15.8333C9.58333 16.3417 9.78527 16.8292 10.1447 17.1886C10.5042 17.5481 10.9917 17.75 11.5 17.75H20.125ZM11.5 15.8333H21.0833V8.16667H11.5V15.8333ZM15.3333 13.4375C14.9521 13.4375 14.5865 13.286 14.3169 13.0165C14.0473 12.7469 13.8958 12.3812 13.8958 12C13.8958 11.6188 14.0473 11.2531 14.3169 10.9835C14.5865 10.714 14.9521 10.5625 15.3333 10.5625C15.7146 10.5625 16.0802 10.714 16.3498 10.9835C16.6194 11.2531 16.7708 11.6188 16.7708 12C16.7708 12.3812 16.6194 12.7469 16.3498 13.0165C16.0802 13.286 15.7146 13.4375 15.3333 13.4375Z" fill="white" />
+</svg>
+</span>
+Wallet Connect
+</a>
+</div>
+</div>
+</div>
+</div>
+</header>
+
+
+<section class="f z gd xe ye ze jg kg" style="background-image: url('images/hero/common-bg.html')">
+<div class="e h g _ ib pb" style="
+          background: linear-gradient(
+            180deg,
+            rgba(20, 20, 32, 0.65) 0%,
+            #141420 100%
+          );
+        "></div>
+<div class="a">
+<div class="da lc kd qd wd fe">
+<div class="td wd eg xf wj">
+<h1 class="la ch mh ph vh">
+Sign In Now
+</h1>
+<p class="qa ch eh oh uh">
+Login to your account for a faster checkout.
+</p>
+<div class="va za yc _c fd">
+<button class="za lb zb yc _c ld qd wd ie xi zi">
+<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_59_460)">
+<path d="M20.2522 10.7169C20.264 10.0466 20.1934 9.37738 20.0419 8.72363H10.7012V12.3419H16.1841C16.0802 12.9763 15.8465 13.5836 15.497 14.1272C15.1474 14.6708 14.6893 15.1396 14.1501 15.5052L14.131 15.6264L17.0846 17.8686L17.2891 17.8886C19.1682 16.1878 20.2518 13.6852 20.2518 10.7169" fill="#4285F4" />
+<path d="M10.7012 20.2507C13.3874 20.2507 15.6425 19.384 17.2897 17.889L14.1502 15.5055C13.3101 16.0798 12.1826 16.4807 10.7012 16.4807C9.44313 16.4735 8.21929 16.0782 7.20334 15.3509C6.1874 14.6236 5.43095 13.6013 5.0413 12.429L4.92471 12.4387L1.85362 14.7678L1.81348 14.8772C2.6406 16.4927 3.90995 17.8508 5.4796 18.7998C7.04925 19.7487 8.85731 20.2511 10.7016 20.2507" fill="#34A853" />
+<path d="M5.04097 12.4291C4.82336 11.8084 4.71107 11.157 4.70857 10.5008C4.71258 9.84561 4.82072 9.19505 5.02912 8.57251L5.02357 8.44326L1.91483 6.07666L1.81314 6.12405C1.1154 7.48166 0.751953 8.9806 0.751953 10.5007C0.751953 12.0208 1.1154 13.5197 1.81314 14.8773L5.04097 12.4291Z" fill="#FBBC05" />
+<path d="M10.7011 4.52068C12.1267 4.49899 13.5055 5.01929 14.5481 5.97241L17.356 3.28568C15.5551 1.63002 13.1702 0.721576 10.7011 0.750678C8.85685 0.750248 7.0488 1.25258 5.47915 2.2015C3.9095 3.15042 2.64013 4.50853 1.81299 6.12395L5.03011 8.57241C5.42359 7.40027 6.18255 6.37872 7.2 5.6518C8.21744 4.92487 9.44203 4.52924 10.7011 4.52068Z" fill="#EB4335" />
+</g>
+<defs>
+<clipPath id="clip0_59_460">
+<rect width="19.5" height="19.5" fill="white" transform="translate(0.751953 0.750732)" />
+</clipPath>
+</defs>
+</svg>
+</button>
+<button class="za lb zb yc _c ld qd wd ie xi zi">
+<svg width="10" height="21" viewBox="0 0 10 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_59_456)">
+<path d="M6.32902 20.2481V11.3552H9.20362L9.63399 7.88957H6.32902V5.67683C6.32902 4.67346 6.59737 3.9896 7.98313 3.9896L9.75049 3.98875V0.889099C9.44469 0.847017 8.39564 0.752686 7.17516 0.752686C4.62703 0.752686 2.88252 2.36771 2.88252 5.33377V7.88966H0.000488281V11.3553H2.88243V20.2482L6.32902 20.2481Z" fill="#0080FF" />
+</g>
+<defs>
+<clipPath id="clip0_59_456">
+<rect width="9.75" height="19.5" fill="white" transform="translate(0.000488281 0.749512)" />
+</clipPath>
+</defs>
+</svg>
+</button>
+<button class="za lb zb yc _c ld qd wd ie xi zi">
+<svg width="26" height="21" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_59_452)">
+<path d="M25.249 3.05699C24.318 3.45078 23.3334 3.7125 22.3254 3.8341C23.3877 3.22292 24.1819 2.25512 24.5574 1.11408C23.5631 1.68596 22.4752 2.08873 21.3408 2.30497C20.6451 1.58418 19.7419 1.08302 18.7485 0.866664C17.7551 0.650309 16.7176 0.728762 15.7709 1.09182C14.8241 1.45488 14.0119 2.08576 13.4398 2.90242C12.8678 3.71908 12.5623 4.68375 12.5632 5.67101C12.5593 6.04774 12.5987 6.42372 12.6808 6.79197C10.6622 6.696 8.68727 6.188 6.88505 5.30117C5.08283 4.41435 3.49392 3.16866 2.22219 1.64556C1.56927 2.72792 1.36694 4.0111 1.65648 5.23321C1.94603 6.45531 2.70563 7.52418 3.78024 8.22167C2.97741 8.20064 2.19156 7.99278 1.48889 7.61563V7.66924C1.49021 8.80546 1.89517 9.90655 2.6356 10.7872C3.37603 11.6678 4.40671 12.2742 5.55417 12.5042C5.12007 12.6152 4.67269 12.6697 4.22379 12.6663C3.90145 12.6718 3.57943 12.6436 3.26332 12.5822C3.59125 13.5587 4.22327 14.4126 5.07236 15.0264C5.92145 15.6402 6.94586 15.9837 8.00459 16.0096C6.20857 17.3716 3.99357 18.1105 1.71355 18.1083C1.30763 18.1109 0.90196 18.0882 0.499023 18.0405C2.81914 19.4903 5.5227 20.2572 8.28278 20.2486C17.6196 20.2486 22.7245 12.7486 22.7245 6.24757C22.7245 6.02996 22.7167 5.82015 22.7059 5.61155C23.7067 4.91703 24.5685 4.05134 25.249 3.05699Z" fill="#03A9F4" />
+</g>
+<defs>
+<clipPath id="clip0_59_452">
+<rect width="24.75" height="19.5" fill="white" transform="translate(0.499023 0.749512)" />
+</clipPath>
+</defs>
+</svg>
+</button>
+</div>
+<div class="f z qa za yc _c">
+<span class="e j/2 h _ ab mb pb oc/2 pe pj"></span>
+<p class="fe eh oh uh xj">
+Or, sign in with your email
+</p>
+</div>
+<form>
+<div class="ka">
+<label for="email" class="la xa eh oh vh">
+Email
+</label>
+<input type="email" name="email" id="email" placeholder="Enter your email" class="pb ld qd wd ie sf wf eh oh uh di ii fj gj" />
+</div>
+<div class="ka">
+<label for="password" class="la xa eh oh vh">
+Password
+</label>
+<input type="password" name="password" id="password" placeholder="Enter your password" class="pb ld qd wd ie sf wf eh oh uh di ii fj gj" />
+</div>
+<div class="qa ad qj">
+<div class="f ka oj">
+<label for="checkboxLabelOne" class="za sc tc yc eh oh uh">
+<div class="relative">
+<input type="checkbox" id="checkboxLabelOne" class="b" />
+<div class="box wa za nb _b yc _c md qd zd ae qe te">
+<span class="_h">
+<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.9305 1.0795C10.8168 0.973502 10.6381 0.973502 10.5244 1.0795L4.59448 6.43975C4.54574 6.48517 4.48076 6.48517 4.43202 6.43975L1.49145 3.77476C1.37773 3.66877 1.19902 3.66877 1.08529 3.77476C0.971569 3.88076 0.971569 4.04732 1.08529 4.15331L4.02586 6.8183C4.15583 6.93943 4.33454 7 4.497 7C4.67571 7 4.83818 6.93943 4.96815 6.8183L10.898 1.45804C11.028 1.35205 11.028 1.18549 10.9305 1.0795Z" fill="white" />
+<path fill-rule="evenodd" clip-rule="evenodd" d="M11.2146 0.797485L11.2251 0.808826C11.4696 1.07472 11.4666 1.50215 11.1602 1.76041L5.23851 7.1133C5.0308 7.30573 4.77022 7.4001 4.49712 7.4001C4.24507 7.4001 3.96679 7.3088 3.75557 7.11317L0.812654 4.44605C0.529228 4.18189 0.529254 3.74641 0.812681 3.48225C1.07921 3.23384 1.49438 3.23307 1.76182 3.47997L4.5136 5.97385L10.2545 0.784471C10.5219 0.537806 10.9369 0.538643 11.2034 0.78698L11.2146 0.797485ZM1.49156 3.77486C1.37784 3.66887 1.19913 3.66887 1.0854 3.77486C0.97168 3.88086 0.97168 4.04742 1.0854 4.15341L4.02597 6.81839C4.15594 6.93953 4.33465 7.0001 4.49712 7.0001C4.67582 7.0001 4.83829 6.93953 4.96826 6.81839L10.8981 1.45814C11.0281 1.35215 11.0281 1.18559 10.9306 1.07959C10.8169 0.973599 10.6382 0.973599 10.5245 1.07959L4.59459 6.43985C4.54585 6.48527 4.48087 6.48527 4.43213 6.43985L1.49156 3.77486Z" fill="white" />
+</svg>
+</span>
+</div>
+</div>
+Keep me signed in
+</label>
+</div>
+<a href="javascript:void(0)" class="eh oh uh bj">
+Forgot Password?
+</a>
+</div>
+<button class="za pb yc _c ld he df eh nh vh aj">
+Signin
+</button>
+</form>
+</div>
+<p class="jf ch eh oh uh">
+Don't you have an account?
+<a href="signup.html" class="vh cj">
+Sign up
+</a>
+</p>
+</div>
+</div>
+</section>
+
+
+<footer class="fe mg">
+<div class="a">
+<div class="ea za xc">
+<div class="pb nf rj/12 al/12 dm/12">
+<div class="ma">
+<div class="ec">
+<a href="index.html" class="na ya">
+<img src="src/images/logo.svg" alt="logo" class="bb" />
+</a>
+<p class="oa eh oh uh">
+XNS is a decentralized naming service built on the XRP Ledger. It enables users to send and receive payments using simple, human-readable names.
+</p>
+<div class="za yc">
+<a href="javascript:void(0)" name="social-link" aria-label="social-link" class="pa vh cj">
+<svg width="24" height="24" viewBox="0 0 24 24" class="_e">
+<path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C15.9164 21.5878 18.0622 20.3855 19.6099 18.5701C21.1576 16.7546 22.0054 14.4456 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
+</svg>
+</a>
+<a href="javascript:void(0)" name="social-link" aria-label="social-link" class="pa vh cj">
+<svg width="24" height="24" viewBox="0 0 24 24" class="_e">
+<path d="M22.46 6C21.69 6.35 20.86 6.58 20 6.69C20.88 6.16 21.56 5.32 21.88 4.31C21.05 4.81 20.13 5.16 19.16 5.36C18.37 4.5 17.26 4 16 4C13.65 4 11.73 5.92 11.73 8.29C11.73 8.63 11.77 8.96 11.84 9.27C8.27998 9.09 5.10998 7.38 2.99998 4.79C2.62998 5.42 2.41998 6.16 2.41998 6.94C2.41998 8.43 3.16998 9.75 4.32998 10.5C3.61998 10.5 2.95998 10.3 2.37998 10C2.37998 10 2.37998 10 2.37998 10.03C2.37998 12.11 3.85998 13.85 5.81998 14.24C5.45998 14.34 5.07998 14.39 4.68998 14.39C4.41998 14.39 4.14998 14.36 3.88998 14.31C4.42998 16 5.99998 17.26 7.88998 17.29C6.42998 18.45 4.57998 19.13 2.55998 19.13C2.21998 19.13 1.87998 19.11 1.53998 19.07C3.43998 20.29 5.69998 21 8.11998 21C16 21 20.33 14.46 20.33 8.79C20.33 8.6 20.33 8.42 20.32 8.23C21.16 7.63 21.88 6.87 22.46 6Z" />
+</svg>
+</a>
+<a href="javascript:void(0)" name="social-link" aria-label="social-link" class="pa vh cj">
+<svg width="24" height="24" viewBox="0 0 24 24" class="_e">
+<path d="M19 3C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19ZM18.5 18.5V13.2C18.5 12.3354 18.1565 11.5062 17.5452 10.8948C16.9338 10.2835 16.1046 9.94 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17C14.6813 12.17 15.0374 12.3175 15.2999 12.5801C15.5625 12.8426 15.71 13.1987 15.71 13.57V18.5H18.5ZM6.88 8.56C7.32556 8.56 7.75288 8.383 8.06794 8.06794C8.383 7.75288 8.56 7.32556 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19C6.43178 5.19 6.00193 5.36805 5.68499 5.68499C5.36805 6.00193 5.19 6.43178 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56ZM8.27 18.5V10.13H5.5V18.5H8.27Z" />
+</svg>
+</a>
+<a href="javascript:void(0)" name="social-link" aria-label="social-link" class="pa vh cj">
+<svg width="24" height="24" viewBox="0 0 24 24" class="_e">
+<path d="M10 15L15.19 12L10 9V15ZM21.56 7.17C21.69 7.64 21.78 8.27 21.84 9.07C21.91 9.87 21.94 10.56 21.94 11.16L22 12C22 14.19 21.84 15.8 21.56 16.83C21.31 17.73 20.73 18.31 19.83 18.56C19.36 18.69 18.5 18.78 17.18 18.84C15.88 18.91 14.69 18.94 13.59 18.94L12 19C7.81 19 5.2 18.84 4.17 18.56C3.27 18.31 2.69 17.73 2.44 16.83C2.31 16.36 2.22 15.73 2.16 14.93C2.09 14.13 2.06 13.44 2.06 12.84L2 12C2 9.81 2.16 8.2 2.44 7.17C2.69 6.27 3.27 5.69 4.17 5.44C4.64 5.31 5.5 5.22 6.82 5.16C8.12 5.09 9.31 5.06 10.41 5.06L12 5C16.19 5 18.8 5.16 19.83 5.44C20.73 5.69 21.31 6.27 21.56 7.17Z" />
+</svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="pb nf rj/12 al/12 em/12">
+<div class="ma">
+<h2 class="qa jh ph vh">
+Company
+</h2>
+<ul>
+<li>
+<a href="javascript:void(0)" class="ia ya eh oh uh gi bj">
+About company
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="ia ya eh oh uh gi bj">
+Company services
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="ia ya eh oh uh gi bj">
+Job opportunities
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="ia ya eh oh uh gi bj">
+Contact us
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="pb nf rj/12 al/12 fm/12">
+<div class="ma">
+<h2 class="qa jh ph vh">
+Customer
+</h2>
+<ul>
+<li>
+<a href="javascript:void(0)" class="ia ya eh oh uh gi bj">
+Client support
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="ia ya eh oh uh gi bj">
+Latest news
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="ia ya eh oh uh gi bj">
+Company Details
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="ia ya eh oh uh gi bj">
+Who we are
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="pb nf rj/12 al/12 em/12">
+<div class="ma">
+<h2 class="qa jh ph vh">
+Subscribe Now
+</h2>
+<p class="ka eh oh uh">
+Enter your email address for receiving valuable newsletters.
+</p>
+<form class="f">
+<input type="email" placeholder="Enter your email address" class="eb pb kd qd wd ce ng og fh oh vh di ej" />
+<button type="submit" name="submit" aria-label="submit" class="e p j/2 za fb ub oc/2 yc _c ld he vh">
+<svg width="20" height="20" viewBox="0 0 20 20" class="_e">
+<path d="M1.66669 17.5L19.1667 10L1.66669 2.5V8.33333L14.1667 10L1.66669 11.6667V17.5Z" />
+</svg>
+</button>
+</form>
+</div>
+</div>
+</div>
+<div class="rd wd">
+<div class="yf ch">
+<p class="eh oh uh">
+&copy; Copyright 2023 - XNS, All rights reserved.
+</p>
+</div>
+</div>
+</div>
+</footer>
+
+<script defer src="bundle.js"></script><script>(function(){var js = "window['__CF$cv$params']={r:'812851cea9240bae',t:'MTY5NjcwNDUxOS41MjQwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='cdn-cgi/challenge-platform/h/g/scripts/jsd/dffb14d6/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854" integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==" data-cf-beacon='{"rayId":"812851cea9240bae","version":"2023.8.0","r":1,"b":1,"token":"9a6015d415bb4773a0bff22543062d3b","si":100}' crossorigin="anonymous"></script>
+</body>
+
+<!-- Mirrored from nft-tailwind.preview.uideck.com/signin by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 07 Oct 2023 18:49:03 GMT -->
+</html>
