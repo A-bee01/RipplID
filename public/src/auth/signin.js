@@ -66,7 +66,7 @@ function toggleSignInManual() {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              window.location.href = "signin.html";
+              window.location.href = "/public/auth/login/signin.html";
             }
           });
         // If you are using multiple auth providers on your app you should handle linking
@@ -81,7 +81,7 @@ function toggleSignInManual() {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              window.location.href = "signin.html";
+              window.location.href = "/public/auth/login/signin.html";
             }
           });
       } else if (errorCode === "auth/invalid-email") {
@@ -94,7 +94,7 @@ function toggleSignInManual() {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              window.location.href = "signin.html";
+              window.location.href = "/public/auth/login/signin.html";
             }
           });
       } else if (errorCode === "auth/wrong-password") {
@@ -107,7 +107,7 @@ function toggleSignInManual() {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              window.location.href = "signin.html";
+              window.location.href = "/public/auth/login/signin.html";
             }
           });
       } else if (errorCode === "auth/user-not-found") {
@@ -120,7 +120,7 @@ function toggleSignInManual() {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              window.location.href = "signin.html";
+              window.location.href = "/public/auth/login/signin.html";
             }
           });
       } else if (errorCode === "auth/weak-password") {
@@ -133,7 +133,7 @@ function toggleSignInManual() {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              window.location.href = "signin.html";
+              window.location.href = "/public/auth/login/signin.html";
             }
           });
       } else if (errorCode === "auth/email-already-in-use") {
@@ -146,7 +146,7 @@ function toggleSignInManual() {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              window.location.href = "signin.html";
+              window.location.href = "/public/auth/login/signin.html";
             }
           });
       } else if (errorCode === "auth/operation-not-allowed") {
@@ -159,7 +159,7 @@ function toggleSignInManual() {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              window.location.href = "signin.html";
+              window.location.href = "/public/auth/login/signin.html";
             }
           });
       } else if (errorCode === "auth/weak-password") {
@@ -172,7 +172,7 @@ function toggleSignInManual() {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              window.location.href = "signin.html";
+              window.location.href = "/public/auth/login/signin.html";
             }
           });
       } else {
@@ -185,7 +185,7 @@ function toggleSignInManual() {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              window.location.href = "signin.html";
+              window.location.href = "/public/auth/login/signin.html";
             }
           });
       }
@@ -238,7 +238,7 @@ getRedirectResult(auth)
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "signin.html";
+            window.location.href = "/public/auth/login/signin.html";
           }
         });
       // If you are using multiple auth providers on your app you should handle linking
@@ -253,7 +253,7 @@ getRedirectResult(auth)
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "signin.html";
+            window.location.href = "/public/auth/login/signin.html";
           }
         });
     } else if (errorCode === "auth/invalid-email") {
@@ -266,7 +266,7 @@ getRedirectResult(auth)
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "signin.html";
+            window.location.href = "/public/auth/login/signin.html";
           }
         });
     } else if (errorCode === "auth/wrong-password") {
@@ -279,7 +279,7 @@ getRedirectResult(auth)
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "signin.html";
+            window.location.href = "/public/auth/login/signin.html";
           }
         });
     } else if (errorCode === "auth/user-not-found") {
@@ -292,7 +292,7 @@ getRedirectResult(auth)
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "signin.html";
+            window.location.href = "/public/auth/login/signin.html";
           }
         });
     } else if (errorCode === "auth/weak-password") {
@@ -305,7 +305,7 @@ getRedirectResult(auth)
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "signin.html";
+            window.location.href = "/public/auth/login/signin.html";
           }
         });
     } else if (errorCode === "auth/email-already-in-use") {
@@ -318,7 +318,7 @@ getRedirectResult(auth)
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "signin.html";
+            window.location.href = "/public/auth/login/signin.html";
           }
         });
     } else if (errorCode === "auth/operation-not-allowed") {
@@ -331,7 +331,7 @@ getRedirectResult(auth)
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "signin.html";
+            window.location.href = "/public/auth/login/signin.html";
           }
         });
     } else if (errorCode === "auth/weak-password") {
@@ -344,7 +344,7 @@ getRedirectResult(auth)
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "signin.html";
+            window.location.href = "/public/auth/login/signin.html";
           }
         });
     } else {
@@ -357,7 +357,7 @@ getRedirectResult(auth)
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "signin.html";
+            window.location.href = "/public/auth/login/signin.html";
           }
         });
     }
@@ -375,7 +375,7 @@ getRedirectResult(auth)
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "signin.html";
+            window.location.href = "/public/auth/login/signin.html";
           }
         });
     });

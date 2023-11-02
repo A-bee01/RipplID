@@ -17,11 +17,11 @@
 <script src="/__/firebase/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 <script src="/__/firebase/init.js"></script>
-<link rel="icon" href="favicon.ico"><link href="style.css" rel="stylesheet"></head>
+<link rel="icon" href="favicon.ico"><link href="/public/style.css" rel="stylesheet"></head>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="module" src="bundle.js"></script>
-<script type="module" src="src/config/firebase-config.js"></script>
-<script type="module" src="src/auth/signin.js">
+<script type="module" src="/public/src/config/firebase-config.js"></script>
+<script type="module" src="/public/src/auth/signin.js">
 </script>
 <body class="be" x-data="
       {
@@ -38,8 +38,8 @@
 <div class="a">
 <div class="f aa za yc ad">
 <div class="qb bc nf">
-<a href="index.html" class="header-logo xa pb" :class="scrolledFromTop ? 'of hl' : 'pf il' ">
-<img src="src/images/logo.svg" alt="logo" class="bb bc" />
+<a / class="header-logo xa pb" :class="scrolledFromTop ? 'of hl' : 'pf il' ">
+<img src="/public/src/images/logo.svg" alt="logo" class="bb bc" />
 </a>
 </div>
 <div class="za pb yc ad nf">
@@ -52,7 +52,7 @@
 <nav :class="!navbarOpen && 'ab' " id="navbarCollapse" class="e i m pb cc kd fe ci ok vk zk dl fl sf jl kl xl jm">
 <ul class="rm wk">
 <li class="ij f">
-<a href="index.html" class="ca za tf eh nh th lj rk xk ll ml">
+<a / class="ca za tf eh nh th lj rk xk ll ml">
 Home
 </a>
 </li>
@@ -86,10 +86,10 @@ Connect Wallet
 <a href="support.html" class="xa md uf nf fh oh th bj">
 Support
 </a>
-<a href="signin.html" class="xa md uf nf fh oh th bj">
+<a href="/public/auth/login/signin.html" class="xa md uf nf fh oh th bj">
 Sign In Page
 </a>
-<a href="signup.html" class="xa md uf nf fh oh th bj">
+<a href="/public/auth/signup/signup.html" class="xa md uf nf fh oh th bj">
 Sign Up Page
 </a>
 </div>
@@ -216,7 +216,7 @@ Signin
 </div>
 <p class="jf ch eh oh uh">
 Don't you have an account?
-<a href="signup.html" class="vh cj">
+<a href="/public/auth/signup/signup.html" class="vh cj">
 Sign up
 </a>
 </p>
@@ -231,8 +231,8 @@ Sign up
 <div class="pb nf rj/12 al/12 dm/12">
 <div class="ma">
 <div class="ec">
-<a href="index.html" class="na ya">
-<img src="src/images/logo.svg" alt="logo" class="bb" />
+<a / class="na ya">
+<img src="/public/src/images/logo.svg" alt="logo" class="bb" />
 </a>
 <p class="oa eh oh uh">
 XNS is a decentralized naming service built on the XRP Ledger. It enables users to send and receive payments using simple, human-readable names.

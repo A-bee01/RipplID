@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <!--
+// v0 by Vercel.
+// https://v0.dev/t/rjmBCv34EBx
+-->
+    <div class="flex min-h-screen w-full flex-col bg-[#1a202c]">
+      <header class="flex h-16 items-center border-b px-4 md:px-6 bg-[#2d3748]">
+        <div class="relative md:hidden">
+          <button
+            class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-10 px-4 py-2 border-[#38b2ac] text-[#38b2ac] hover:bg-[#38b2ac] hover:text-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-6 w-6 text-[#38b2ac]"
+            >
+              <line x1="4" x2="20" y1="12" y2="12"></line>
+              <line x1="4" x2="20" y1="6" y2="6"></line>
+              <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+          </button>
+          <nav
+            class="absolute left-0 top-full flex flex-col bg-white p-4 gap-4 border border-[#38b2ac] hidden"
+          >
+            <a class="font-bold text-gray-800" href="#">Domain Search</a
+            ><a class="text-gray-600" href="#">Domain Details</a
+            ><a class="text-gray-600" href="#">Purchase Options</a
+            ><a class="text-gray-600" href="#">Transaction History</a>
+          </nav>
+        </div>
+        <nav
+          class="hidden md:flex flex-col gap-6 text-lg font-medium md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6"
+        >
+          <a
+            class="flex items-center gap-2 text-lg font-semibold md:text-base"
+            href="#"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-6 w-6 text-[#38b2ac]"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" x2="22" y1="12" y2="12"></line>
+              <path
+                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+              ></path></svg
+            ><span class="text-white">XNS</span></a
+          ><a class="font-bold text-gray-300" href="#">Domain Search</a
+          ><a class="text-gray-400" href="#">Domain Details</a
+          ><a class="text-gray-400" href="#">Purchase Options</a
+          ><a class="text-gray-400" href="#">Transaction History</a>
+        </nav>
+        <div
+          class="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4"
+        >
+          <div class="ml-auto flex-1 sm:flex-initial text-gray-400">
+            Account Balance: 0 XRP
+          </div>
+          <button
+            class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-10 px-4 py-2 border-[#38b2ac] text-[#38b2ac] hover:bg-[#38b2ac] hover:text-white"
+          >
+            Connect Wallet
+          </button>
+        </div>
+      </header>
+      <main class="flex flex-1 items-center justify-center p-4 md:p-10">
+        <form
+          class="rounded-lg border border-[#38b2ac] bg-[#38b2ac]/40 p-4 max-w-lg w-full shadow-lg bg-white dark:bg-gray-800"
+        >
+          <div class="relative">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="absolute left-2.5 top-2.5 h-4 w-4 text-[#38b2ac]"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path></svg
+            ><input
+              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 pl-8 shadow-inner"
+              placeholder="Search domain (.xrp)"
+              type="search"
+            />
+          </div>
+          <div class="mt-4 text-gray-400">
+            <p>Sample Searches:</p>
+            <ul>
+              <li>- domain1.xrp</li>
+              <li>- domain2.xrp</li>
+              <li>- domain3.xrp</li>
+            </ul>
+          </div>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>
