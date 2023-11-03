@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Dashboard</title>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>   
+     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script type="module" src="/src/config/firebase-config.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="/src/user/app.js"></script>
     <link rel="icon" href="favicon.ico" />
-    <link href="style.css" rel="stylesheet" />
   </head>
   <script type="module" src="/src/config/firebase-config.js"></script>
   <body>
@@ -26,8 +29,9 @@
       <header
         class="flex h-16 items-center border-b px-4 md:px-6 bg-[#2d3748] justify-between"
       >
-        <div class="md:hidden">
+        <div class="relative md:hidden">
           <button
+            id="menu-toggle"
             class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-10 px-4 py-2 border-[#38b2ac] text-[#38b2ac] hover:bg-[#38b2ac] hover:text-white"
           >
             <svg
@@ -47,7 +51,16 @@
               <line x1="4" x2="20" y1="18" y2="18"></line>
             </svg>
           </button>
+          <nav
+            id="mobile-menu"
+            class="absolute left-0 top-full flex flex-col bg-white p-4 gap-4 border border-[#38b2ac] hidden"
+          >
+           <a class="text-gray-600" href="#">Account</a
+            ><a class="text-gray-600" href="#">Transactions</a
+            ><a class="text-gray-600" id="logoutbtn">Logout</a>
+          </nav>
         </div>
+        
         <nav
           class="hidden md:flex items-center text-lg font-medium md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6"
         >
@@ -72,13 +85,12 @@
                 d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
               ></path></svg
             ><span class="text-white">XNS</span></a
-          ><a class="font-bold text-gray-300" href="#"> Domain Search </a
-          ><a class="text-gray-400" href="#"> Domain Details </a
-          ><a class="text-gray-400" href="#"> Purchase Options </a
-          ><a class="text-gray-400" href="#"> Transaction History </a>
+          ><a class="text-gray-400" href="#"> Account </a
+          ><a class="text-gray-400" href="#"> Transactions </a
+          ><a class="text-gray-400" id="logoutbtn"> Logout </a>
         </nav>
         <div class="flex items-center gap-4 md:gap-2 lg:gap-4">
-          <div class="text-gray-400">Account Balance: 0 XRP</div>
+          <div class="text-gray-400">Balance: <b id="balance">...</b> XRP</div>
           <button
             class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-10 px-4 py-2 border-[#38b2ac] text-[#38b2ac] hover:bg-[#38b2ac] hover:text-white"
           >
