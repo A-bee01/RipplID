@@ -6,7 +6,7 @@ import {
 const auth = firebase.auth();
 const db = firebase.firestore();
 const PUBLIC_SERVER = "wss://xrplcluster.com/";
-const client = new xrpl.Client(PUBLIC_SERVER);
+const XRPLclient = new xrpl.Client(PUBLIC_SERVER);
 const balance = document.getElementById("balance");
 const logoutButton = document.getElementById("logoutbtn");
 const fundwalletBtn = document.getElementById("fundwallet");
@@ -34,7 +34,7 @@ window.addEventListener("load", () => {
 });
 
 async function connectXRPL() {
-  await client.connect();
+  await XRPLclient.connect();
 }
 
 // async function getBalance() {
@@ -42,15 +42,20 @@ async function connectXRPL() {
 //     console.log(account.xrpBalance);
 //   }
 
-function fundWalletWithXRP() {
-  window.location.href = "/user/fundwallet";
+async function fundWalletWithXRP() {
+    const userRef = db.collection("users").doc(auth.currentUser.email);
+    const doc = await userRef.get();
+  swal.fire({
+    title: doc.data().walletid,
+    text: "Send XRP to your address to fund your wallet",
+    icon: "info",
+  });
 }
 
-function createWallet() {
+async function createWallet() {
   if (createwalletBtn.textContent == "Create Wallet") {
     const test_wallet = xrpl.Wallet.generate();
     const wallet = test_wallet;
-    console.log(wallet);
     db.collection("users")
       .doc(auth.currentUser.email)
       .update({
@@ -70,8 +75,10 @@ function createWallet() {
       });
   } else {
     //copy to clipboard
+    const userRef = db.collection("users").doc(auth.currentUser.email);
+    const doc = await userRef.get();
     const el = document.createElement("textarea");
-    el.value = createwalletBtn.textContent;
+    el.value = doc.data().walletid;
     document.body.appendChild(el);
     el.select();
     document.execCommand("copy");
@@ -101,9 +108,12 @@ onAuthStateChanged(auth, function (user) {
       createwalletBtn.textContent = data.walletid
         ? data.walletid
         : "Create Wallet";
-      // if (connectwalletBtn.textContent.length > 10) {
-      //     connectwalletBtn.textContent = connectwalletBtn.textContent.substring(0, 10) + '...';
-      //   }
+      if (/Mobile/.test(navigator.userAgent)) {
+        if (createwalletBtn.textContent.length > 10) {
+          createwalletBtn.textContent =
+            createwalletBtn.textContent.substring(0, 10) + "...";
+        }
+      }
     });
   } else {
     window.location.href = "/auth/login";
@@ -131,6 +141,7 @@ function handleSignOut() {
   signOut(auth)
     .then(() => {
       // Sign-out successful.
+      XRPLclient.disconnect();
       window.location.href = "/";
     })
     .catch((error) => {
