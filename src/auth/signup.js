@@ -19,39 +19,6 @@ const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 const googleSignInButton = document.getElementById("google-sign-in");
 const signUpButton = document.getElementById("register");
-function toggleSignIn() {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-  });
-  if (auth.currentUser) {
-    signOut(auth);
-  } else {
-    const email = emailInput.value;
-    const password = passwordInput.value;
-    if (email.length < 4) {
-      alert("Please enter an email address.");
-      return;
-    }
-    if (password.length < 4) {
-      alert("Please enter a password.");
-      return;
-    }
-    // Sign in with email and pass.
-    signInWithEmailAndPassword(auth, email, password).catch(function (
-      error
-    ) {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      if (errorCode === "auth/wrong-password") {
-        alert("Wrong password.");
-      } else {
-        alert(errorMessage);
-      }
-      console.log(error);
-    });
-  }
-}
 
 /**
  * Handles the sign up button press.
