@@ -62,11 +62,6 @@ function toggleSignInManual() {
             text: "Account already exists with different credential",
             icon: "error",
             confirmButtonText: "Ok",
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = "/auth/login";
-            }
           });
         // If you are using multiple auth providers on your app you should handle linking
         // the user's accounts here.
@@ -77,11 +72,6 @@ function toggleSignInManual() {
             text: "Invalid login credentials",
             icon: "error",
             confirmButtonText: "Ok",
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = "/auth/login";
-            }
           });
       } else if (errorCode === "auth/invalid-email") {
         swal
@@ -90,11 +80,6 @@ function toggleSignInManual() {
             text: "Invalid email",
             icon: "error",
             confirmButtonText: "Ok",
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = "/auth/login";
-            }
           });
       } else if (errorCode === "auth/wrong-password") {
         swal
@@ -103,11 +88,6 @@ function toggleSignInManual() {
             text: "Wrong password",
             icon: "error",
             confirmButtonText: "Ok",
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = "/auth/login";
-            }
           });
       } else if (errorCode === "auth/user-not-found") {
         swal
@@ -116,11 +96,6 @@ function toggleSignInManual() {
             text: "User not found",
             icon: "error",
             confirmButtonText: "Ok",
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = "/auth/login";
-            }
           });
       } else if (errorCode === "auth/weak-password") {
         swal
@@ -129,11 +104,6 @@ function toggleSignInManual() {
             text: "Weak password",
             icon: "error",
             confirmButtonText: "Ok",
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = "/auth/login";
-            }
           });
       } else if (errorCode === "auth/email-already-in-use") {
         swal
@@ -142,11 +112,6 @@ function toggleSignInManual() {
             text: "Email already in use",
             icon: "error",
             confirmButtonText: "Ok",
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = "/auth/login";
-            }
           });
       } else if (errorCode === "auth/operation-not-allowed") {
         swal
@@ -155,11 +120,6 @@ function toggleSignInManual() {
             text: "Operation not allowed",
             icon: "error",
             confirmButtonText: "Ok",
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = "/auth/login";
-            }
           });
       } else if (errorCode === "auth/weak-password") {
         swal
@@ -168,11 +128,6 @@ function toggleSignInManual() {
             text: "Weak password",
             icon: "error",
             confirmButtonText: "Ok",
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = "/auth/login";
-            }
           });
       } else {
         swal
@@ -181,11 +136,6 @@ function toggleSignInManual() {
             text: "Something went wrong",
             icon: "error",
             confirmButtonText: "Ok",
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = "/auth/login";
-            }
           });
       }
       console.log(error);
