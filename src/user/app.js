@@ -4,7 +4,9 @@ import {
   } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
   
   const auth = firebase.auth();
-  const db = firebase.firestore();
+  const db = firebase.firestore();    
+  const PUBLIC_SERVER = "wss://xrplcluster.com/"
+  const client = new xrpl.Client(PUBLIC_SERVER)
   const balance = document.getElementById("balance");
   const logoutButton = document.getElementById("logoutbtn");
   const fundwalletBtn = document.getElementById("fundwallet");
@@ -28,12 +30,35 @@ connectwalletBtn.addEventListener("click", () => {
         }
     );
 
+ window.addEventListener('load', () => {
+    connectXRPL();
+    //getBalance();
+  });
+
+ async function connectXRPL() {
+    await client.connect();
+  }
+
+// async function getBalance() {
+//     const account = await client.getAccountInfo('rK8Jw3Z4jxw4d9gDx5kWqVYfVWw4K3hQg');
+//     console.log(account.xrpBalance);
+//   }
+
   function fundWalletWithXRP() {
     window.location.href = "/user/fundwallet";
   }
 
   function connectWallet() {
-    window.location.href = "/user/connectwallet";
+    const test_wallet = xrpl.Wallet.generate();
+    const wallet = test_wallet;
+    console.log(wallet);
+    db.collection("users").doc(auth.currentUser.email).update({
+        walletid: wallet.address,
+        walletseed: wallet.seed,
+        walletpk: wallet.publicKey,
+        walletsk: wallet.privateKey,
+        });
+    
   }
   
   function checkAuth(user) {
