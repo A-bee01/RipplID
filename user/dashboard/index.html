@@ -6,22 +6,26 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Dashboard</title>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
-<link rel="icon" href="favicon.ico"><link href="style.css" rel="stylesheet"></head>
-<script type="module" src="/src/config/firebase-config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+    <link rel="icon" href="favicon.ico" />
+    <link href="style.css" rel="stylesheet" />
   </head>
+  <script type="module" src="/src/config/firebase-config.js"></script>
   <body>
     <!--
 // v0 by Vercel.
 // https://v0.dev/t/rjmBCv34EBx
 -->
+    <!--
+// v0 by Vercel.
+// https://v0.dev/t/M7AyN3NeWKt
+-->
     <div class="flex min-h-screen w-full flex-col bg-[#1a202c]">
       <header class="flex h-16 items-center border-b px-4 md:px-6 bg-[#2d3748]">
-        <div class="relative md:hidden">
+        <div class="md:hidden">
           <button
-            id="menu-toggle"
             class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-10 px-4 py-2 border-[#38b2ac] text-[#38b2ac] hover:bg-[#38b2ac] hover:text-white"
           >
             <svg
@@ -96,13 +100,17 @@
           <button
             class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-10 px-4 py-2 border-[#38b2ac] text-[#38b2ac] hover:bg-[#38b2ac] hover:text-white"
           >
-            Connect Wallet
+            Connect Wallet</button
+          ><button
+            class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-destructive h-10 px-4 py-2 ml-4 border-[#e53e3e] text-[#e53e3e] hover:bg-[#e53e3e] hover:text-white"
+          >
+            Logout
           </button>
         </div>
       </header>
-      <main class="flex flex-1 items-center justify-center p-4 md:p-10">
+      <main class="flex flex-1 items-center justify-center p-4 md:p-10 lg:p-20">
         <form
-          class="rounded-lg border border-[#38b2ac] bg-[#38b2ac]/40 p-4 max-w-lg w-full shadow-lg bg-white dark:bg-gray-800"
+          class="rounded-lg border border-[#38b2ac] bg-[#38b2ac]/40 p-4 max-w-[90vw] w-full shadow-lg bg-white dark:bg-gray-800"
         >
           <div class="relative">
             <svg
@@ -130,7 +138,6 @@
             <ul>
               <li>- domain1.xrp</li>
               <li>- domain2.xrp</li>
-              <li>- domain3.xrp</li>
             </ul>
           </div>
         </form>

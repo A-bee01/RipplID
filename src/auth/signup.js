@@ -16,7 +16,8 @@ const form = document.getElementById("form");
 const emailInput = document.getElementById("email");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
-const googleSignInButton = document.getElementById("google-sign-in");
+const googleSignInButton = document.getElementById(
+  "google-sign-in");
 const signUpButton = document.getElementById("register");
 
 /**
