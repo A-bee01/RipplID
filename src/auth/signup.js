@@ -228,11 +228,6 @@ function sendVerificationEmailToUser() {
         text: "Verification email sent!",
         icon: "success",
         confirmButtonText: "OK",
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          window.location.href = "/auth/login";
-        }
       });
   });
 }
