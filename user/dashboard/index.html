@@ -48,7 +48,7 @@
             class="absolute left-0 top-full flex flex-col bg-white p-4 gap-4 border border-[#38b2ac] hidden"
           >
            <a class="text-gray-600" href="#">Account</a
-            ><a class="text-gray-600" href="#"> Fund Wallet </a
+            ><a class="text-gray-600" id="fundwallet"> Fund Wallet </a
             ><a class="text-gray-600" href="#">Transactions</a
             ><a class="text-gray-600" id="logoutbtn">Logout</a>
           </nav>
@@ -79,7 +79,7 @@
               ></path></svg
             ><span class="text-white">XNS</span></a
           ><a class="text-gray-400" href="#"> Account </a
-          ><a class="text-gray-400" href="#"> Fund Wallet </a
+          ><a class="text-gray-400" id="fundwallet"> Fund Wallet </a
           ><a class="text-gray-400" href="#"> Transactions </a
           ><a class="text-gray-400" id="logoutbtn"> Logout </a>
         </nav>
@@ -87,8 +87,9 @@
           <div class="text-gray-400">Balance: <b id="balance">...</b> XRP</div>
           <button
             class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-10 px-4 py-2 border-[#38b2ac] text-[#38b2ac] hover:bg-[#38b2ac] hover:text-white"
-          >
-            Connect Wallet
+            id="connectwallet"
+            >
+           <img src="/src/images/loader/loader.gif" class="h-6 w-6" />
           </button>
         </div>
       </header>

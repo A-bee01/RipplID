@@ -5,15 +5,36 @@ import {
   
   const auth = firebase.auth();
   const db = firebase.firestore();
+  const balance = document.getElementById("balance");
   const logoutButton = document.getElementById("logoutbtn");
+  const fundwalletBtn = document.getElementById("fundwallet");
+  const connectwalletBtn = document.getElementById("connectwallet");
   const menuToggle = document.getElementById('menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   
-  logoutButton.addEventListener("click", handleSignOut);
+logoutButton.addEventListener("click", handleSignOut);
   
-  menuToggle.addEventListener('click', () => {
+menuToggle.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
   });
+
+fundwalletBtn.addEventListener("click", () => {
+        fundWalletWithXRP();
+        }
+    );
+
+connectwalletBtn.addEventListener("click", () => {
+        connectWallet();
+        }
+    );
+
+  function fundWalletWithXRP() {
+    window.location.href = "/user/fundwallet";
+  }
+
+  function connectWallet() {
+    window.location.href = "/user/connectwallet";
+  }
   
   function checkAuth(user) {
     if (user) {
@@ -27,7 +48,8 @@ import {
     if (user) {
       checkAuth(user);
       getUserData(user).then((data) => {
-        document.getElementById("balance").innerHTML = data.balance ? data.balance : 0;
+        balance.innerHTML = data.balance ? data.balance : 0;
+        connectwalletBtn.innerHTML = data.walletid ? data.walletid : "Connect Wallet";
       });
     } else {
       window.location.href = "/auth/login";
