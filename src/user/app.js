@@ -6,7 +6,8 @@ import {
 const auth = firebase.auth();
 const db = firebase.firestore();
 const PUBLIC_SERVER = "wss://xrplcluster.com/";
-const XRPLclient = new xrpl.Client(PUBLIC_SERVER);
+const TEST_SERVER = "wss://s.altnet.rippletest.net:51233";
+const XRPLclient = new xrpl.Client(TEST_SERVER);
 const balance = document.getElementById("balance");
 const logoutButton = document.getElementById("logoutbtn");
 const fundwalletBtn = document.getElementById("fundwallet");
@@ -28,23 +29,18 @@ createwalletBtn.addEventListener("click", () => {
   createWallet();
 });
 
-window.addEventListener("load", () => {
-  connectXRPL();
-  //getBalance();
+window.addEventListener("load", async () => {
+  await connectXRPL();
+  await getBalance();
 });
 
 async function connectXRPL() {
   await XRPLclient.connect();
 }
 
-// async function getBalance() {
-//     const account = await client.getAccountInfo('rK8Jw3Z4jxw4d9gDx5kWqVYfVWw4K3hQg');
-//     console.log(account.xrpBalance);
-//   }
-
 async function fundWalletWithXRP() {
-    const userRef = db.collection("users").doc(auth.currentUser.email);
-    const doc = await userRef.get();
+  const userRef = db.collection("users").doc(auth.currentUser.email);
+  const doc = await userRef.get();
   swal.fire({
     title: doc.data().walletid,
     text: "Send XRP to your address to fund your wallet",
@@ -52,9 +48,38 @@ async function fundWalletWithXRP() {
   });
 }
 
+async function getBalance() {
+  try {
+    const userRef = db.collection("users").doc(auth.currentUser.email);
+    const doc = await userRef.get();
+    const walletfromseed = xrpl.Wallet.fromSeed(doc.data().walletseed);
+    const account = await XRPLclient.request({
+      command: "account_info",
+      account: doc.data().walletid,
+      ledger_index: "validated",
+    });
+    balance.textContent = account.result.account_data.Balance / 10000000000 - 1;
+    userRef.update({
+      balance: account.result.account_data.Balance / 10000000000 - 1,
+    });
+  } catch (error) {
+    console.error(error);
+    swal.fire({
+      title: "Unable to connect to wallet",
+      text: error.message,
+      icon: "error",
+      confirmButtonText: "OK",
+    });
+  }
+}
+
 async function createWallet() {
-  if (createwalletBtn.textContent == "Create Wallet") {
-    const test_wallet = xrpl.Wallet.generate();
+  const userRef = db.collection("users").doc(auth.currentUser.email);
+  const doc = await userRef.get();
+  if (!doc.data().walletid) {
+    const fund_result = await XRPLclient.fundWallet();
+    const test_wallet = fund_result.wallet;
+    console.log(test_wallet);
     const wallet = test_wallet;
     db.collection("users")
       .doc(auth.currentUser.email)
@@ -66,12 +91,18 @@ async function createWallet() {
       })
       .then(() => {
         createwalletBtn.textContent = wallet.address;
-        swal.fire({
-          title: "Success!",
-          text: "Wallet created successfully!",
-          icon: "success",
-          confirmButtonText: "OK",
-        });
+        swal
+          .fire({
+            title: "Success!",
+            text: "Wallet created successfully!",
+            icon: "success",
+            confirmButtonText: "OK",
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              window.location.reload();
+            }
+          });
       });
   } else {
     //copy to clipboard
