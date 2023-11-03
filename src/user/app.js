@@ -74,26 +74,19 @@ async function getBalance() {
         balance: account.result.account_data.Balance / 1000000,
       });
       //ad to transaction history
-      db.collection("transactions")
-        .add({
-          amount: account.result.account_data.Balance / 1000000,
-          date: new Date(),
-          type: "Deposit",
-          email: auth.currentUser.email,
-          trasactionhash: account.result.account_data.Account,
-        });
+      db.collection("transactions").add({
+        amount: account.result.account_data.Balance / 1000000,
+        date: new Date(),
+        type: "Deposit",
+        email: auth.currentUser.email,
+        trasactionhash: account.result.account_data.Account,
+      });
       console.log(account.result.account_data.Balance);
     }
 
     balance.textContent = account.result.account_data.Balance / 1000000;
   } catch (error) {
     console.error(error);
-    // swal.fire({
-    //   title: "Unable to connect to wallet",
-    //   text: error.message,
-    //   icon: "error",
-    //   confirmButtonText: "OK",
-    // });
   }
 }
 
