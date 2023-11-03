@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Dashboard - XNS</title>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>   
-     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
     <script type="module" src="/src/config/firebase-config.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/xrpl/build/xrpl-latest-min.js"></script>
     <script type="module" src="/src/user/app.js"></script>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style.css" />
     <link rel="icon" href="favicon.ico" />
   </head>
   <script type="module" src="/src/config/firebase-config.js"></script>
@@ -49,13 +49,13 @@
             id="mobile-menu"
             class="absolute left-0 top-full flex flex-col bg-white p-4 gap-4 border border-[#38b2ac] hidden"
           >
-           <a class="text-gray-600" href="#">Account</a
+            <a class="text-gray-600" href="#">Account</a
             ><a class="text-gray-600" id="fundwallet"> Fund Wallet </a
             ><a class="text-gray-600" href="#">Transactions</a
             ><a class="text-gray-600" id="logoutbtn">Logout</a>
           </nav>
         </div>
-        
+
         <nav
           class="hidden md:flex items-center text-lg font-medium md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6"
         >
@@ -90,12 +90,18 @@
           <button
             class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-10 px-4 py-2 border-[#38b2ac] text-[#38b2ac] hover:bg-[#38b2ac] hover:text-white"
             id="connectwallet"
-            >
-           <img src="/src/images/loader/loader.gif" class="h-6 w-6" />
+          >
+            <img src="/src/images/loader/loader.gif" class="h-6 w-6" />
           </button>
         </div>
       </header>
       <main class="flex flex-1 items-center justify-center p-4 md:p-10">
+        <h1
+          class="text-3xl font-bold text-white absolute top-16 left-1/2 transform -translate-x-1/2 mt-8"
+          id="rz8kq8he2gc"
+        >
+          XNS
+        </h1>
         <form
           class="rounded-lg border border-[#38b2ac] bg-[#38b2ac]/40 p-4 max-w-lg w-full shadow-lg bg-white dark:bg-gray-800"
         >
