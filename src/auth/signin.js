@@ -298,7 +298,7 @@ onAuthStateChanged(auth, function (user) {
             .catch((error) => {
                 console.log("Error getting document:", error);
             });
-            window.location.href = "/dashboard";
+            window.location.href = "/user/dashboard";
     } else {
         swal
             .fire({
