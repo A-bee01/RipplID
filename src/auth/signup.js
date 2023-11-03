@@ -1,8 +1,6 @@
 import {
-  //connectAuthEmulator,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
-  getAuth,
   onAuthStateChanged,
   sendEmailVerification,
   sendPasswordResetEmail,

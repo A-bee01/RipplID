@@ -1,7 +1,5 @@
 import {
   GoogleAuthProvider,
-  connectAuthEmulator,
-  getAuth,
   sendEmailVerification,
   getRedirectResult,
   onAuthStateChanged,
