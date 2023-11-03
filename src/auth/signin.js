@@ -321,11 +321,6 @@ getRedirectResult(auth)
           text: "Verification email sent!",
           icon: "success",
           confirmButtonText: "OK",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "/auth/login";
-          }
         });
     });
   }
@@ -353,18 +348,7 @@ onAuthStateChanged(auth, function (user) {
             .catch((error) => {
                 console.log("Error getting document:", error);
             });
-        swal
-      .fire({
-        title: "Success",
-        text: "You have successfully logged in",
-        icon: "success",
-        confirmButtonText: "Ok",
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          window.location.href = "/dashboard";
-        }
-      });
+            window.location.href = "/dashboard";
     } else {
         swal
             .fire({
