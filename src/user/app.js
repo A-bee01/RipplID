@@ -44,7 +44,7 @@ async function fundWalletWithXRP() {
     });
   } else {
     swal.fire({
-      title: doc.data().walletid,
+      title: `<b style="font-size: smaller">${doc.data().walletid}</b>`,
       text: "Send XRP to your address to fund your wallet",
       icon: "info",
     });
