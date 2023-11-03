@@ -61,21 +61,24 @@ async function getBalance() {
       ledger_index: "validated",
     });
     //compare balance to check if new balance is greater than old balance
-    if (account.result.account_data.Balance / 1000000 > doc.data().balance) {
+    if (
+      account.result.account_data.Balance - 10000000000 >
+      doc.data().balance
+    ) {
       swal.fire({
         title: "Success!",
         html: `Account Successfully Funded! <br> Amount: <b>${
-          account.result.account_data.Balance / 1000000 - doc.data().balance
+          account.result.account_data.Balance - 10000000000 - doc.data().balance
         } XRP</b>`,
         icon: "success",
         confirmButtonText: "OK",
       });
       userRef.update({
-        balance: account.result.account_data.Balance / 1000000,
+        balance: account.result.account_data.Balance - 10000000000,
       });
       //ad to transaction history
       db.collection("transactions").add({
-        amount: account.result.account_data.Balance / 1000000,
+        amount: account.result.account_data.Balance - 10000000000,
         date: new Date(),
         type: "Deposit",
         email: auth.currentUser.email,
@@ -83,8 +86,10 @@ async function getBalance() {
       });
       console.log(account.result.account_data.Balance);
     }
-
-    balance.textContent = account.result.account_data.Balance / 1000000;
+    userRef.update({
+      balance: account.result.account_data.Balance - 10000000000,
+    });
+    balance.textContent = account.result.account_data.Balance - 10000000000;
   } catch (error) {
     console.error(error);
   }
@@ -164,7 +169,6 @@ onAuthStateChanged(auth, async function (user) {
     await connectXRPL();
     await getBalance();
     getUserData(user).then((data) => {
-      balance.textContent = data.balance ? data.balance : 0;
       createwalletBtn.textContent = data.walletid
         ? data.walletid
         : "Create Wallet";
