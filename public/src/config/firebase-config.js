@@ -1,6 +1,3 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-
-
 const firebaseConfig = {
     apiKey: "AIzaSyDj_1vWuONl5K8XfEnQ4iHHDQYr6BBOd5g",
     authDomain: "xrpl-ns.firebaseapp.com",
@@ -11,4 +8,4 @@ const firebaseConfig = {
     measurementId: "G-JGECZ5R0ND",
   };
   
-  initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
