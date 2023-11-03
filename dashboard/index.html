@@ -15,6 +15,7 @@
       <header class="flex h-16 items-center border-b px-4 md:px-6 bg-[#2d3748]">
         <div class="relative md:hidden">
           <button
+            id="menu-toggle"
             class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-10 px-4 py-2 border-[#38b2ac] text-[#38b2ac] hover:bg-[#38b2ac] hover:text-white"
           >
             <svg
@@ -35,6 +36,7 @@
             </svg>
           </button>
           <nav
+            id="mobile-menu"
             class="absolute left-0 top-full flex flex-col bg-white p-4 gap-4 border border-[#38b2ac] hidden"
           >
             <a class="font-bold text-gray-800" href="#">Domain Search</a
@@ -72,6 +74,13 @@
           ><a class="text-gray-400" href="#">Purchase Options</a
           ><a class="text-gray-400" href="#">Transaction History</a>
         </nav>
+        <script>
+          const menuToggle = document.getElementById('menu-toggle');
+          const mobileMenu = document.getElementById('mobile-menu');
+          menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+          });
+        </script>
         <div
           class="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4"
         >
