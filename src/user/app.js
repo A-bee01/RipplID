@@ -1,110 +1,140 @@
 import {
-    signOut,
-    onAuthStateChanged,
-  } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-  
-  const auth = firebase.auth();
-  const db = firebase.firestore();    
-  const PUBLIC_SERVER = "wss://xrplcluster.com/"
-  const client = new xrpl.Client(PUBLIC_SERVER)
-  const balance = document.getElementById("balance");
-  const logoutButton = document.getElementById("logoutbtn");
-  const fundwalletBtn = document.getElementById("fundwallet");
-  const connectwalletBtn = document.getElementById("connectwallet");
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  
+  signOut,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+const PUBLIC_SERVER = "wss://xrplcluster.com/";
+const client = new xrpl.Client(PUBLIC_SERVER);
+const balance = document.getElementById("balance");
+const logoutButton = document.getElementById("logoutbtn");
+const fundwalletBtn = document.getElementById("fundwallet");
+const createwalletBtn = document.getElementById("connectwallet");
+const menuToggle = document.getElementById("menu-toggle");
+const mobileMenu = document.getElementById("mobile-menu");
+
 logoutButton.addEventListener("click", handleSignOut);
-  
-menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
+
+menuToggle.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
+});
 
 fundwalletBtn.addEventListener("click", () => {
-        fundWalletWithXRP();
-        }
-    );
+  fundWalletWithXRP();
+});
 
-connectwalletBtn.addEventListener("click", () => {
-        connectWallet();
-        }
-    );
+createwalletBtn.addEventListener("click", () => {
+  createWallet();
+});
 
- window.addEventListener('load', () => {
-    connectXRPL();
-    //getBalance();
-  });
+window.addEventListener("load", () => {
+  connectXRPL();
+  //getBalance();
+});
 
- async function connectXRPL() {
-    await client.connect();
-  }
+async function connectXRPL() {
+  await client.connect();
+}
 
 // async function getBalance() {
 //     const account = await client.getAccountInfo('rK8Jw3Z4jxw4d9gDx5kWqVYfVWw4K3hQg');
 //     console.log(account.xrpBalance);
 //   }
 
-  function fundWalletWithXRP() {
-    window.location.href = "/user/fundwallet";
-  }
+function fundWalletWithXRP() {
+  window.location.href = "/user/fundwallet";
+}
 
-  function connectWallet() {
+function createWallet() {
+  if (createwalletBtn.textContent == "Create Wallet") {
     const test_wallet = xrpl.Wallet.generate();
     const wallet = test_wallet;
     console.log(wallet);
-    db.collection("users").doc(auth.currentUser.email).update({
+    db.collection("users")
+      .doc(auth.currentUser.email)
+      .update({
         walletid: wallet.address,
         walletseed: wallet.seed,
         walletpk: wallet.publicKey,
         walletsk: wallet.privateKey,
+      })
+      .then(() => {
+        createwalletBtn.textContent = wallet.address;
+        swal.fire({
+          title: "Success!",
+          text: "Wallet created successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
         });
-    
-  }
-  
-  function checkAuth(user) {
-    if (user) {
-      return user;
-    } else {
-      window.location.href = "/auth/login";
-    }
-  }
-  
-  onAuthStateChanged(auth, function (user) {
-    if (user) {
-      checkAuth(user);
-      getUserData(user).then((data) => {
-        balance.innerHTML = data.balance ? data.balance : 0;
-        connectwalletBtn.innerHTML = data.walletid ? data.walletid : "Connect Wallet";
       });
-    } else {
-      window.location.href = "/auth/login";
-    }
-  });
-  
-  // get user data from firestore
-  const getUserData = async (user) => {
-    if (!user) {
-      return null;
-    }
-  
-    const userRef = db.collection("users").doc(user.email);
-    const doc = await userRef.get();
-    if (!doc.exists) {
-      console.log("No such document!");
-      return null;
-    } else {
-      const data = doc.data();
-      return data;
-    }
-  };
-  
-  function handleSignOut() {
-    signOut(auth).then(() => {
+  } else {
+    //copy to clipboard
+    const el = document.createElement("textarea");
+    el.value = createwalletBtn.textContent;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    swal.fire({
+      title: "Success!",
+      text: "Wallet address copied to clipboard!",
+      icon: "success",
+      confirmButtonText: "OK",
+    });
+  }
+}
+
+function checkAuth(user) {
+  if (user) {
+    return user;
+  } else {
+    window.location.href = "/auth/login";
+  }
+}
+
+onAuthStateChanged(auth, function (user) {
+  if (user) {
+    checkAuth(user);
+    getUserData(user).then((data) => {
+      balance.textContent = data.balance ? data.balance : 0;
+      createwalletBtn.textContent = data.walletid
+        ? data.walletid
+        : "Create Wallet";
+      // if (connectwalletBtn.textContent.length > 10) {
+      //     connectwalletBtn.textContent = connectwalletBtn.textContent.substring(0, 10) + '...';
+      //   }
+    });
+  } else {
+    window.location.href = "/auth/login";
+  }
+});
+
+// get user data from firestore
+const getUserData = async (user) => {
+  if (!user) {
+    return null;
+  }
+
+  const userRef = db.collection("users").doc(user.email);
+  const doc = await userRef.get();
+  if (!doc.exists) {
+    console.log("No such document!");
+    return null;
+  } else {
+    const data = doc.data();
+    return data;
+  }
+};
+
+function handleSignOut() {
+  signOut(auth)
+    .then(() => {
       // Sign-out successful.
       window.location.href = "/";
-    }).catch((error) => {
+    })
+    .catch((error) => {
       // An error happened.
       console.log(error);
     });
-  }
-  
+}
