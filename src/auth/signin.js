@@ -234,11 +234,6 @@ getRedirectResult(auth)
           text: "Account already exists with different credential",
           icon: "error",
           confirmButtonText: "Ok",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "/auth/login";
-          }
         });
       // If you are using multiple auth providers on your app you should handle linking
       // the user's accounts here.
@@ -249,11 +244,6 @@ getRedirectResult(auth)
           text: "Invalid login credentials",
           icon: "error",
           confirmButtonText: "Ok",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "/auth/login";
-          }
         });
     } else if (errorCode === "auth/invalid-email") {
       swal
@@ -262,11 +252,6 @@ getRedirectResult(auth)
           text: "Invalid email",
           icon: "error",
           confirmButtonText: "Ok",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "/auth/login";
-          }
         });
     } else if (errorCode === "auth/wrong-password") {
       swal
@@ -275,11 +260,6 @@ getRedirectResult(auth)
           text: "Wrong password",
           icon: "error",
           confirmButtonText: "Ok",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "/auth/login";
-          }
         });
     } else if (errorCode === "auth/user-not-found") {
       swal
@@ -288,11 +268,6 @@ getRedirectResult(auth)
           text: "User not found",
           icon: "error",
           confirmButtonText: "Ok",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "/auth/login";
-          }
         });
     } else if (errorCode === "auth/weak-password") {
       swal
@@ -301,11 +276,6 @@ getRedirectResult(auth)
           text: "Weak password",
           icon: "error",
           confirmButtonText: "Ok",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "/auth/login";
-          }
         });
     } else if (errorCode === "auth/email-already-in-use") {
       swal
@@ -314,11 +284,6 @@ getRedirectResult(auth)
           text: "Email already in use",
           icon: "error",
           confirmButtonText: "Ok",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "/auth/login";
-          }
         });
     } else if (errorCode === "auth/operation-not-allowed") {
       swal
@@ -327,11 +292,6 @@ getRedirectResult(auth)
           text: "Operation not allowed",
           icon: "error",
           confirmButtonText: "Ok",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "/auth/login";
-          }
         });
     } else if (errorCode === "auth/weak-password") {
       swal
@@ -340,11 +300,6 @@ getRedirectResult(auth)
           text: "Weak password",
           icon: "error",
           confirmButtonText: "Ok",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "/auth/login";
-          }
         });
     } else {
       swal
@@ -353,11 +308,6 @@ getRedirectResult(auth)
           text: "Something went wrong",
           icon: "error",
           confirmButtonText: "Ok",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "/auth/login";
-          }
         });
     }
   });
