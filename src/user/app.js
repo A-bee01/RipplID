@@ -75,7 +75,6 @@ async function getBalance() {
       });
       //ad to transaction history
       db.collection("transactions")
-        .doc(auth.currentUser.email)
         .add({
           amount: account.result.account_data.Balance / 1000000,
           date: new Date(),
