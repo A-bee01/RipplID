@@ -29,11 +29,6 @@ createwalletBtn.addEventListener("click", () => {
   createWallet();
 });
 
-window.addEventListener("load", async () => {
-  await connectXRPL();
-  await getBalance();
-});
-
 async function connectXRPL() {
   await XRPLclient.connect();
 }
@@ -41,35 +36,43 @@ async function connectXRPL() {
 async function fundWalletWithXRP() {
   const userRef = db.collection("users").doc(auth.currentUser.email);
   const doc = await userRef.get();
-  swal.fire({
-    title: doc.data().walletid,
-    text: "Send XRP to your address to fund your wallet",
-    icon: "info",
-  });
+  if (doc.data().walletid == null) {
+    swal.fire({
+      title: "No wallet",
+      text: "Please a create wallet first",
+      icon: "warning",
+    });
+  } else {
+    swal.fire({
+      title: doc.data().walletid,
+      text: "Send XRP to your address to fund your wallet",
+      icon: "info",
+    });
+  }
 }
 
 async function getBalance() {
   try {
     const userRef = db.collection("users").doc(auth.currentUser.email);
     const doc = await userRef.get();
-    const walletfromseed = xrpl.Wallet.fromSeed(doc.data().walletseed);
     const account = await XRPLclient.request({
       command: "account_info",
       account: doc.data().walletid,
       ledger_index: "validated",
     });
-    balance.textContent = account.result.account_data.Balance / 10000000000 - 1;
+    balance.textContent = account.result.account_data.Balance / 1000000;
     userRef.update({
-      balance: account.result.account_data.Balance / 10000000000 - 1,
+      balance: account.result.account_data.Balance / 1000000,
     });
+    console.log(account.result.account_data.Balance);
   } catch (error) {
     console.error(error);
-    swal.fire({
-      title: "Unable to connect to wallet",
-      text: error.message,
-      icon: "error",
-      confirmButtonText: "OK",
-    });
+    // swal.fire({
+    //   title: "Unable to connect to wallet",
+    //   text: error.message,
+    //   icon: "error",
+    //   confirmButtonText: "OK",
+    // });
   }
 }
 
@@ -77,10 +80,12 @@ async function createWallet() {
   const userRef = db.collection("users").doc(auth.currentUser.email);
   const doc = await userRef.get();
   if (!doc.data().walletid) {
-    const fund_result = await XRPLclient.fundWallet();
-    const test_wallet = fund_result.wallet;
-    console.log(test_wallet);
-    const wallet = test_wallet;
+    createwalletBtn.innerHTML =
+      "<img src='/src/images/loader/loader.gif' class='h-6 w-6' />";
+    const generate_wallet = await XRPLclient.fundWallet();
+    const new_wallet = generate_wallet.wallet;
+    console.log(new_wallet);
+    const wallet = new_wallet;
     db.collection("users")
       .doc(auth.currentUser.email)
       .update({
@@ -91,6 +96,14 @@ async function createWallet() {
       })
       .then(() => {
         createwalletBtn.textContent = wallet.address;
+        if (/Mobile/.test(navigator.userAgent)) {
+          if (data.walletid != null) {
+            if (createwalletBtn.textContent.length > 10) {
+              createwalletBtn.textContent =
+                createwalletBtn.textContent.substring(0, 10) + "...";
+            }
+          }
+        }
         swal
           .fire({
             title: "Success!",
@@ -131,18 +144,22 @@ function checkAuth(user) {
   }
 }
 
-onAuthStateChanged(auth, function (user) {
+onAuthStateChanged(auth, async function (user) {
   if (user) {
     checkAuth(user);
+    await connectXRPL();
+    await getBalance();
     getUserData(user).then((data) => {
       balance.textContent = data.balance ? data.balance : 0;
       createwalletBtn.textContent = data.walletid
         ? data.walletid
         : "Create Wallet";
       if (/Mobile/.test(navigator.userAgent)) {
-        if (createwalletBtn.textContent.length > 10) {
-          createwalletBtn.textContent =
-            createwalletBtn.textContent.substring(0, 10) + "...";
+        if (data.walletid != null) {
+          if (createwalletBtn.textContent.length > 10) {
+            createwalletBtn.textContent =
+              createwalletBtn.textContent.substring(0, 10) + "...";
+          }
         }
       }
     });
