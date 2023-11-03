@@ -60,11 +60,33 @@ async function getBalance() {
       account: doc.data().walletid,
       ledger_index: "validated",
     });
+    //compare balance to check if new balance is greater than old balance
+    if (account.result.account_data.Balance / 1000000 > doc.data().balance) {
+      swal.fire({
+        title: "Success!",
+        html: `Account Successfully Funded! <br> Amount: <b>${
+          account.result.account_data.Balance / 1000000 - doc.data().balance
+        } XRP</b>`,
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+      userRef.update({
+        balance: account.result.account_data.Balance / 1000000,
+      });
+      //ad to transaction history
+      db.collection("transactions")
+        .doc(auth.currentUser.email)
+        .add({
+          amount: account.result.account_data.Balance / 1000000,
+          date: new Date(),
+          type: "Deposit",
+          email: auth.currentUser.email,
+          trasactionhash: account.result.account_data.Account,
+        });
+      console.log(account.result.account_data.Balance);
+    }
+
     balance.textContent = account.result.account_data.Balance / 1000000;
-    userRef.update({
-      balance: account.result.account_data.Balance / 1000000,
-    });
-    console.log(account.result.account_data.Balance);
   } catch (error) {
     console.error(error);
     // swal.fire({
