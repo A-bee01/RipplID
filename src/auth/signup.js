@@ -89,7 +89,7 @@ function handleSignUp() {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "/public/auth/login";
+            window.location.href = "/auth/login";
           }
         });
       // If you are using multiple auth providers on your app you should handle linking
@@ -104,7 +104,7 @@ function handleSignUp() {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "/public/auth/login";
+            window.location.href = "/auth/login";
           }
         });
     } else if (errorCode === "auth/invalid-email") {
@@ -117,7 +117,7 @@ function handleSignUp() {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "/public/auth/login";
+            window.location.href = "/auth/login";
           }
         });
     } else if (errorCode === "auth/wrong-password") {
@@ -130,7 +130,7 @@ function handleSignUp() {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "/public/auth/login";
+            window.location.href = "/auth/login";
           }
         });
     } else if (errorCode === "auth/user-not-found") {
@@ -143,7 +143,7 @@ function handleSignUp() {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "/public/auth/login";
+            window.location.href = "/auth/login";
           }
         });
     } else if (errorCode === "auth/weak-password") {
@@ -156,7 +156,7 @@ function handleSignUp() {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "/public/auth/login";
+            window.location.href = "/auth/login";
           }
         });
     } else if (errorCode === "auth/email-already-in-use") {
@@ -169,7 +169,7 @@ function handleSignUp() {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "/public/auth/login";
+            window.location.href = "/auth/login";
           }
         });
     } else if (errorCode === "auth/operation-not-allowed") {
@@ -182,7 +182,7 @@ function handleSignUp() {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "/public/auth/login";
+            window.location.href = "/auth/login";
           }
         });
     } else if (errorCode === "auth/weak-password") {
@@ -195,7 +195,7 @@ function handleSignUp() {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "/public/auth/login";
+            window.location.href = "/auth/login";
           }
         });
     } else {
@@ -208,7 +208,7 @@ function handleSignUp() {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "/public/auth/login";
+            window.location.href = "/auth/login";
           }
         });
     }
@@ -231,7 +231,7 @@ function sendVerificationEmailToUser() {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          window.location.href = "/public/auth/login";
+          window.location.href = "/auth/login";
         }
       });
   });
@@ -281,7 +281,7 @@ function addUserToFirestore(user) {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              window.location.href = "/public/auth/login";
+              window.location.href = "/auth/login";
             }
           });
       } else {
