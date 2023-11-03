@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="/style.css" />
     <link rel="icon" href="favicon.ico" />
   </head>
-  <script type="module" src="/src/config/firebase-config.js"></script>
   <body>
     <div class="flex min-h-screen w-full flex-col bg-[#1a202c]">
       <header
@@ -49,10 +48,10 @@
             id="mobile-menu"
             class="absolute left-0 top-full flex flex-col bg-white p-4 gap-4 border border-[#38b2ac] hidden"
           >
-            <a class="text-gray-600" href="#">Account</a
-            ><a class="text-gray-600" id="fundwallet"> Fund Wallet </a
+            <a class="text-gray-600" href="/user/account/">Account</a
+            ><a class="text-gray-600" href="#" id="fundwallet"> Fund Wallet </a
             ><a class="text-gray-600" href="#">Transactions</a
-            ><a class="text-gray-600" id="logoutbtn">Logout</a>
+            ><a class="text-gray-600" href="#" id="logoutbtn">Logout</a>
           </nav>
         </div>
 
@@ -80,10 +79,10 @@
                 d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
               ></path></svg
             ><span class="text-white">XNS</span></a
-          ><a class="text-gray-400" href="#"> Account </a
-          ><a class="text-gray-400" id="fundwallet"> Fund Wallet </a
+          ><a class="text-gray-400" href="/user/account/"> Account </a
+          ><a class="text-gray-400" href="#" id="fundwallet"> Fund Wallet </a
           ><a class="text-gray-400" href="#"> Transactions </a
-          ><a class="text-gray-400" id="logoutbtn"> Logout </a>
+          ><a class="text-gray-400" href="#" id="logoutbtn"> Logout </a>
         </nav>
         <div class="flex items-center gap-4 md:gap-2 lg:gap-4">
           <div class="text-gray-400">Balance: <b id="balance">...</b> XRP</div>
