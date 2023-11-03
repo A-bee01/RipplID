@@ -392,13 +392,14 @@ onAuthStateChanged(auth, function (user) {
             .get()
             .then((doc) => {
                 if (doc.exists) {
+                users.doc(user.uid).update({
+                    isverified: true,
+                });                
                 console.log("Document data:", doc.data());
                 } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
-                users.doc(user.uid).update({
-                    isverified: true,
-                });
+                
                 }
             })
             .catch((error) => {
