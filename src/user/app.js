@@ -121,7 +121,6 @@ async function makePaymentWithXRP(amount) {
     const max_ledger = prepared.LastLedgerSequence
     const signed = walletfromseed.sign(prepared);
     const tx = await XRPLclient.submitAndWait(signed.tx_blob);
-    console.log(tx)
     swal.fire({
       title: "Success!",
       html: `Payment of <b>${amount + 2} XRP</b> was successful!`,
