@@ -12,6 +12,7 @@ const balance = document.getElementById("balance");
 const logoutButton = document.getElementById("logoutbtn");
 const fundwalletBtn = document.getElementById("fundwallet");
 const createwalletBtn = document.getElementById("connectwallet");
+const transactiontableBody = document.getElementById("transactiontable-body");
 const menuToggle = document.getElementById("menu-toggle");
 const mobileMenu = document.getElementById("mobile-menu");
 
@@ -31,6 +32,65 @@ createwalletBtn.addEventListener("click", () => {
 
 async function connectXRPL() {
   await XRPLclient.connect();
+}
+
+function convertTimestampToReadableDate(timestamp) {
+  const date = new Date(timestamp * 1000); // Convert to milliseconds by multiplying by 1000
+
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const seconds = date.getSeconds().toString().padStart(2, "0");
+
+  return `${hours}:${minutes}:${seconds}`;
+}
+
+async function getAndDisplayTransactions() {
+  const userRef = db.collection("users").doc(auth.currentUser.email);
+  const doc = await userRef.get();
+  const transactions = await XRPLclient.request({
+    command: "account_tx",
+    account: doc.data().walletid,
+    ledger_index_min: -1,
+    ledger_index_max: -1,
+    binary: false,
+    limit: 10,
+    forward: false,
+  });
+  console.log(transactions);
+  transactions.result.transactions.forEach((transaction) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+            <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-white-900">${
+              transaction.tx.TransactionType
+            }</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+  <div class="text-sm text-white-900">${transaction.tx.Amount} XRP</div>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap">
+  <div class="text-sm text-white-900">${convertTimestampToReadableDate(
+    transaction.tx.date
+  )}</div>
+    </td>
+
+            <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-white-900">${
+              transaction.tx.Destination
+            }</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+  <div class="text-sm text-white-900">${transaction.tx.Account}</div>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap">
+  <div class="text-sm text-white-900">${transaction.tx.hash}</div>
+  </td>
+        `;
+    transactiontableBody.appendChild(tr);
+  });
 }
 
 async function fundWalletWithXRP() {
@@ -168,6 +228,7 @@ onAuthStateChanged(auth, async function (user) {
     checkAuth(user);
     await connectXRPL();
     await getBalance();
+    await getAndDisplayTransactions();
     getUserData(user).then((data) => {
       createwalletBtn.textContent = data.walletid
         ? data.walletid

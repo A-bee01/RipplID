@@ -11,11 +11,15 @@ import {
   const username = document.getElementById("username");
   const usereamil = document.getElementById("useremail");
   const walletid = document.getElementById("walletid");
+  const walletseed = document.getElementById("seed");
+  const walletpubkey = document.getElementById("pubkey");
+  const walletprk = document.getElementById("prkey");
   const balance = document.getElementById("balance");
   const balance2 = document.getElementById("balance2");
   const usericon = document.getElementById("usericon");
   const totaldomains = document.getElementById("totaldomains");
   const logoutButton = document.getElementById("logoutbtn");
+  const fundwalletBtn = document.getElementById("fundwallet");
   const createwalletBtn = document.getElementById("connectwallet");
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
@@ -26,8 +30,34 @@ import {
     mobileMenu.classList.toggle("hidden");
   });
   
+  fundwalletBtn.addEventListener("click", () => {
+    fundWalletWithXRP();
+  });
+  
+  createwalletBtn.addEventListener("click", () => {
+    createWallet();
+  });
+  
   async function connectXRPL() {
     await XRPLclient.connect();
+  }
+  
+  async function fundWalletWithXRP() {
+    const userRef = db.collection("users").doc(auth.currentUser.email);
+    const doc = await userRef.get();
+    if (doc.data().walletid == null) {
+      swal.fire({
+        title: "No wallet",
+        text: "Please a create wallet first",
+        icon: "warning",
+      });
+    } else {
+      swal.fire({
+        title: `<b style="font-size: smaller">${doc.data().walletid}</b>`,
+        text: "Send XRP to your address to fund your wallet",
+        icon: "info",
+      });
+    }
   }
   
   async function getBalance() {
@@ -74,7 +104,67 @@ import {
       console.error(error);
     }
   }
-
+  
+  async function createWallet() {
+    const userRef = db.collection("users").doc(auth.currentUser.email);
+    const doc = await userRef.get();
+    if (!doc.data().walletid) {
+      createwalletBtn.innerHTML =
+        "<img src='/src/images/loader/loader.gif' class='h-6 w-6' />";
+      const generate_wallet = await XRPLclient.fundWallet();
+      const new_wallet = generate_wallet.wallet;
+      console.log(new_wallet);
+      const wallet = new_wallet;
+      db.collection("users")
+        .doc(auth.currentUser.email)
+        .update({
+          walletid: wallet.address,
+          walletseed: wallet.seed,
+          walletpk: wallet.publicKey,
+          walletsk: wallet.privateKey,
+        })
+        .then(() => {
+          createwalletBtn.textContent = wallet.address;
+          if (/Mobile/.test(navigator.userAgent)) {
+            if (doc.data().walletid != null) {
+              if (createwalletBtn.textContent.length > 10) {
+                createwalletBtn.textContent =
+                  createwalletBtn.textContent.substring(0, 10) + "...";
+              }
+            }
+          }
+          swal
+            .fire({
+              title: "Success!",
+              text: "Wallet created successfully!",
+              icon: "success",
+              confirmButtonText: "OK",
+            })
+            .then((result) => {
+              if (result.isConfirmed) {
+                window.location.reload();
+              }
+            });
+        });
+    } else {
+      //copy to clipboard
+      const userRef = db.collection("users").doc(auth.currentUser.email);
+      const doc = await userRef.get();
+      const el = document.createElement("textarea");
+      el.value = doc.data().walletid;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      swal.fire({
+        title: "Success!",
+        text: "Wallet address copied to clipboard!",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+    }
+  }
+  
   function checkAuth(user) {
     if (user) {
       return user;
@@ -104,6 +194,9 @@ import {
         usereamil.textContent = data.email;
         usericon.innerHTML = user.photoURL ? `<img src="${user.photoURL}" />` : `<b>${data.displayName.charAt(0).toUpperCase()}</b>`;
         walletid.textContent = data.walletid ? data.walletid.substring(0, 15) + "..." : "No wallet";
+        walletseed.textContent = data.walletseed ? data.walletseed.substring(0, 15) + "..." : "No wallet";
+        walletpubkey.textContent = data.walletpk ? data.walletpk.substring(0, 15) + "..." : "No wallet";
+        walletprk.textContent = data.walletsk ? data.walletsk.substring(0, 15) + "..." : "No wallet";
         totaldomains.textContent = data.totaldomains ? data.totaldomains : 0;
       });
     } else {

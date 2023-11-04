@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Dashboard - XNS</title>
+    <title>Transactions - XNS</title>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
     <script type="module" src="/src/config/firebase-config.js"></script>
@@ -13,7 +13,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/xrpl/build/xrpl-latest-min.js"></script>
-    <script type="module" src="/src/user/app.js"></script>
+    <script type="module" src="/src/user/transactions.js"></script>
     <link rel="stylesheet" href="/style.css" />
     <link rel="icon" href="favicon.ico" />
   </head>
@@ -50,7 +50,7 @@
           >
             <a class="text-gray-600" href="/user/account/">Account</a
             ><a class="text-gray-600" href="#" id="fundwallet"> Fund Wallet </a
-            ><a class="text-gray-600" href="/user/transactions/">Transactions</a
+            ><a class="text-gray-600" href="#">Transactions</a
             ><a class="text-gray-600" href="#" id="logoutbtn">Logout</a>
           </nav>
         </div>
@@ -94,46 +94,67 @@
           </button>
         </div>
       </header>
-      <main class="flex flex-1 items-center justify-center p-4 md:p-10">
-        <h1
-          class="text-3xl font-bold text-white absolute top-16 left-1/2 transform -translate-x-1/2 mt-8"
-          id="rz8kq8he2gc"
+      <div class="dark:bg-gray-800 min-h-screen">
+        <header
+          class="flex items-center justify-between px-6 py-4 bg-black text-white"
         >
-          XNS
-        </h1>
-        <form
-          class="rounded-lg border border-[#38b2ac] bg-[#38b2ac]/40 p-4 max-w-lg w-full shadow-lg bg-white dark:bg-gray-800"
-        >
-          <div class="relative">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="absolute left-2.5 top-2.5 h-4 w-4 text-[#38b2ac]"
-            >
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.3-4.3"></path></svg
-            ><input
-              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 pl-8 shadow-inner"
-              placeholder="Search domain (.xrp)"
-              type="search"
-            />
+          <h1 class="text-2xl font-bold">Transaction History</h1>
+        </header>
+        <main class="p-6">
+          <div
+            class="rounded-lg border shadow-sm bg-gray-700 text-white"
+            data-v0-t="card"
+          >
+            <div class="w-full overflow-auto">
+              <table class="w-full caption-bottom text-sm" id="trasactiontable">
+                <thead class="[&amp;_tr]:border-b">
+                  <tr
+                    class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
+                  >
+                    <th
+                      class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0"
+                    >
+                      Transaction Type
+                    </th>
+                    <th
+                      class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0"
+                    >
+                      Amount
+                    </th>
+                    <th
+                      class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0"
+                    >
+                      Time
+                    </th>
+                    <th
+                      class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0"
+                    >
+                      From
+                    </th>
+                    <th
+                      class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0"
+                    >
+                      To
+                    </th>
+
+                    <th
+                      class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0"
+                    >
+                      Transaction Hash
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="[&amp;_tr:last-child]:border-0"
+                  id="transactiontable-body"
+                >
+                  <!-- Table body will be populated dynamically -->
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div class="mt-4 text-gray-400">
-            <p>Sample Searches:</p>
-            <ul>
-              <li>- domain1.xrp</li>
-              <li>- domain2.xrp</li>
-            </ul>
-          </div>
-        </form>
-      </main>
+        </main>
+      </div>
     </div>
   </body>
 </html>
