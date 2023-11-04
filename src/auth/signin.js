@@ -317,6 +317,6 @@ onAuthStateChanged(auth, function (user) {
   } else {
   }
 });
-
+// Button event handlers.
 GooglesignInButton.addEventListener("click", toggleSignIn, false);
 signUpButton.addEventListener("click", toggleSignInManual, false);
