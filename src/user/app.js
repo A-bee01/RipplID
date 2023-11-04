@@ -128,10 +128,7 @@ async function makePaymentWithXRP(amount, domain) {
       confirmButtonText: "OK",
     }).then((result) => {
       if (result.isConfirmed) {
-       window.location.reload();
-      }
-    });
-    domainRef
+          domainRef
     .add({
       domain: domain,
       email: auth.currentUser.email,
@@ -158,8 +155,13 @@ async function makePaymentWithXRP(amount, domain) {
         }</b>`,
         icon: "success",
         confirmButtonText: "OK",
+      }).then(() => {
+         window.location.reload();
       });
     });
+      }
+    });
+
   }
 }
 
