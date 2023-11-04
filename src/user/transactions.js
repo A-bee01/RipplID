@@ -69,22 +69,21 @@ async function getAndDisplayTransactions() {
             }</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-  <div class="text-sm text-white-900">${transaction.tx.Amount} XRP</div>
+  <div class="text-sm text-white-900">${transaction.tx.Amount - 10000000000} XRP</div>
   </td>
   <td class="px-6 py-4 whitespace-nowrap">
   <div class="text-sm text-white-900">${convertTimestampToReadableDate(
     transaction.tx.date
   )}</div>
     </td>
-
             <td class="px-6 py-4 whitespace-nowrap">
+  <div class="text-sm text-white-900">${transaction.tx.Account}</div>
+  </td> 
+   <td class="px-6 py-4 whitespace-nowrap">
             <div class="text-sm text-white-900">${
               transaction.tx.Destination
             }</div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-  <div class="text-sm text-white-900">${transaction.tx.Account}</div>
-  </td>
   <td class="px-6 py-4 whitespace-nowrap">
   <div class="text-sm text-white-900">${transaction.tx.hash}</div>
   </td>

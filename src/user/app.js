@@ -59,7 +59,7 @@ async function searchAndFetchDomain(domain) {
         swal
           .fire({
             title: "Domain available",
-            html: `<b>${domain}</b> <br> Amount: <b>10 XRP</b>`,
+            html: `<b>${domain}</b> <br> Amount: <b>10 XRP + 2 XRP Fee</b>`,
             icon: "info",
             confirmButtonText: "Register",
           })
@@ -83,34 +83,6 @@ async function searchAndFetchDomain(domain) {
                 });
               } else {
                 await makePaymentFromXRP(10);
-                domainRef
-                  .add({
-                    domain: domain,
-                    email: auth.currentUser.email,
-                    date: new Date(),
-                  })
-                  .then(() => {
-                    //deduct 10 xrp from user balance
-                    userRef.update({
-                      balance: doc.data().balance - 10,
-                    });
-                    //add to transaction history
-                    db.collection("transactions").add({
-                      amount: 10,
-                      date: new Date(),
-                      type: "Domain Registration",
-                      email: auth.currentUser.email,
-                      trasactionhash: domain,
-                    });
-                    swal.fire({
-                      title: "Success!",
-                      html: `Domain <b>${domain}</b> is now registered to <b>${
-                        doc.data().walletid
-                      }</b>`,
-                      icon: "success",
-                      confirmButtonText: "OK",
-                    });
-                  });
               }
             }
           });
@@ -129,6 +101,7 @@ async function searchAndFetchDomain(domain) {
   
 
 async function makePaymentFromXRP(amount) {
+  const domainRef = db.collection("domains");
   const userRef = db.collection("users").doc(auth.currentUser.email);
   const doc = await userRef.get();
   const walletfromseed = xrpl.Wallet.fromSeed(doc.data().walletseed);
@@ -140,19 +113,53 @@ async function makePaymentFromXRP(amount) {
     });
   } else {
     const prepared = await XRPLclient.autofill({
-      TransactionType: "Payment",
-      Account: doc.data().walletid,
-      Amount: xrpl.xrpToDrops(amount),
-      Destination: "r9LqNeG6qHxjeUocjvVki2XR35weJ9mZgQ",
+      "TransactionType": "Payment",
+      "Account": doc.data().walletid,
+      "Amount": xrpl.xrpToDrops(amount * 1000000),
+      "Destination": "rs2m5CgLXSSSzZvCXiHGH9iDgXvPLuMkgZ",
     });
-    const maxLedgerVersion = (await XRPLclient.getLedgerVersion()) + 5;
-    const signed = walletfromseed.sign(prepared.txJSON);
-    const tx = await XRPLclient.submit(signed.signedTransaction);
+    const max_ledger = prepared.LastLedgerSequence
+    const signed = walletfromseed.sign(prepared);
+    const tx = await XRPLclient.submitAndWait(signed.tx_blob);
+    console.log(tx)
     swal.fire({
       title: "Success!",
-      html: `Payment of <b>${amount} XRP</b> was successful!`,
+      html: `Payment of <b>${amount + 2} XRP</b> was successful!`,
       icon: "success",
       confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+       
+      }
+    });
+    domainRef
+    .add({
+      domain: domain,
+      email: auth.currentUser.email,
+      date: new Date(),
+    })
+    .then(() => {
+      //deduct 10 xrp from user balance
+      userRef.update({
+        balance: doc.data().balance - 10,
+        totaldomains: doc.data().totaldomains + 1,
+      });
+      //add to transaction history
+      db.collection("transactions").add({
+        amount: 10,
+        date: new Date(),
+        type: "Domain Registration",
+        email: auth.currentUser.email,
+        trasactionhash: domain,
+      });
+      swal.fire({
+        title: "Success!",
+        html: `Domain <b>${domain}</b> is now registered to <b>${
+          doc.data().walletid
+        }</b>`,
+        icon: "success",
+        confirmButtonText: "OK",
+      });
     });
   }
 }
