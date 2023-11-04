@@ -82,7 +82,7 @@ async function searchAndFetchDomain(domain) {
                   icon: "warning",
                 });
               } else {
-                await makePaymentFromXRP(10);
+                await makePaymentWithXRP(10);
               }
             }
           });
@@ -100,7 +100,7 @@ async function searchAndFetchDomain(domain) {
 }
   
 
-async function makePaymentFromXRP(amount) {
+async function makePaymentWithXRP(amount) {
   const domainRef = db.collection("domains");
   const userRef = db.collection("users").doc(auth.currentUser.email);
   const doc = await userRef.get();
