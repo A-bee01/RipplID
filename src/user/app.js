@@ -9,6 +9,7 @@ const PUBLIC_SERVER = "wss://xrplcluster.com/";
 const TEST_SERVER = "wss://s.altnet.rippletest.net:51233";
 const XRPLclient = new xrpl.Client(TEST_SERVER);
 const balance = document.getElementById("balance");
+const searchdomain = document.getElementById("searchdomain");
 const logoutButton = document.getElementById("logoutbtn");
 const fundwalletBtn = document.getElementById("fundwallet");
 const createwalletBtn = document.getElementById("connectwallet");
@@ -16,6 +17,24 @@ const menuToggle = document.getElementById("menu-toggle");
 const mobileMenu = document.getElementById("mobile-menu");
 
 logoutButton.addEventListener("click", handleSignOut);
+
+searchdomain.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const domain = searchdomain.querySelector("input").value;
+  //chek if domain is valid and ends with .xrp
+  const domainRegex = new RegExp(
+    /^(?=.{1,254}$)((?=.{1,63}\.)[a-zA-Z0-9_](?:(?:[a-zA-Z0-9_]|-){0,61}[a-zA-Z0-9_])?\.[xrp]{3})$/
+  );
+  if (!domainRegex.test(domain)) {
+    swal.fire({
+      title: "Invalid domain",
+      text: "Please enter a valid domain, only .xrp domains are allowed",
+      icon: "warning",
+    });
+    return;
+  }
+  searchAndFetchDomain(domain);
+});
 
 menuToggle.addEventListener("click", () => {
   mobileMenu.classList.toggle("hidden");
@@ -28,6 +47,115 @@ fundwalletBtn.addEventListener("click", () => {
 createwalletBtn.addEventListener("click", () => {
   createWallet();
 });
+
+async function searchAndFetchDomain(domain) {
+  const domainRef = db.collection("domains");
+  //check if someone has already registered the domain
+  domainRef
+    .where("domain", "==", domain)
+    .get()
+    .then(async (querySnapshot) => {
+      if (querySnapshot.empty) {
+        swal
+          .fire({
+            title: "Domain available",
+            html: `<b>${domain}</b> <br> Amount: <b>10 XRP</b>`,
+            icon: "info",
+            confirmButtonText: "Register",
+          })
+          .then(async (result) => {
+            if (result.isConfirmed) {
+              const userRef = db
+                .collection("users")
+                .doc(auth.currentUser.email);
+              const doc = await userRef.get();
+              if (doc.data().walletid == null) {
+                swal.fire({
+                  title: "No wallet",
+                  text: "Please a create wallet first",
+                  icon: "warning",
+                });
+              } else if (doc.data().balance < 10) {
+                swal.fire({
+                  title: "Insufficient funds",
+                  text: "Please fund your wallet",
+                  icon: "warning",
+                });
+              } else {
+                await makePaymentFromXRP(10);
+                domainRef
+                  .add({
+                    domain: domain,
+                    email: auth.currentUser.email,
+                    date: new Date(),
+                  })
+                  .then(() => {
+                    //deduct 10 xrp from user balance
+                    userRef.update({
+                      balance: doc.data().balance - 10,
+                    });
+                    //add to transaction history
+                    db.collection("transactions").add({
+                      amount: 10,
+                      date: new Date(),
+                      type: "Domain Registration",
+                      email: auth.currentUser.email,
+                      trasactionhash: domain,
+                    });
+                    swal.fire({
+                      title: "Success!",
+                      html: `Domain <b>${domain}</b> is now registered to <b>${
+                        doc.data().walletid
+                      }</b>`,
+                      icon: "success",
+                      confirmButtonText: "OK",
+                    });
+                  });
+              }
+            }
+          });
+      } else {
+        const userRef = db.collection("users").doc(auth.currentUser.email);
+        const doc = await userRef.get();
+        const data = doc.data();
+        swal.fire({
+          title: "Domain Already Taken",
+          html: `<b>${domain}</b> <br> This domain has already been registered by <b>${data.walletid}</b>`,
+          icon: "info",
+        });
+      }
+    });
+}
+  
+
+async function makePaymentFromXRP(amount) {
+  const userRef = db.collection("users").doc(auth.currentUser.email);
+  const doc = await userRef.get();
+  const walletfromseed = xrpl.Wallet.fromSeed(doc.data().walletseed);
+  if (doc.data().walletid == null) {
+    swal.fire({
+      title: "No wallet",
+      text: "Please a create wallet first",
+      icon: "warning",
+    });
+  } else {
+    const prepared = await XRPLclient.autofill({
+      TransactionType: "Payment",
+      Account: doc.data().walletid,
+      Amount: xrpl.xrpToDrops(amount),
+      Destination: "r9LqNeG6qHxjeUocjvVki2XR35weJ9mZgQ",
+    });
+    const maxLedgerVersion = (await XRPLclient.getLedgerVersion()) + 5;
+    const signed = walletfromseed.sign(prepared.txJSON);
+    const tx = await XRPLclient.submit(signed.signedTransaction);
+    swal.fire({
+      title: "Success!",
+      html: `Payment of <b>${amount} XRP</b> was successful!`,
+      icon: "success",
+      confirmButtonText: "OK",
+    });
+  }
+}
 
 async function connectXRPL() {
   await XRPLclient.connect();
