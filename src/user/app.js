@@ -128,7 +128,7 @@ async function makePaymentWithXRP(amount, domain) {
       confirmButtonText: "OK",
     }).then((result) => {
       if (result.isConfirmed) {
-       
+       window.location.reload();
       }
     });
     domainRef
