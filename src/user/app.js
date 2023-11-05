@@ -82,7 +82,7 @@ async function searchAndFetchDomain(domain) {
                   icon: "warning",
                 });
               } else {
-                await makePaymentWithXRP(10);
+                await makePaymentWithXRP(10, domain);
               }
             }
           });
@@ -100,7 +100,7 @@ async function searchAndFetchDomain(domain) {
 }
   
 
-async function makePaymentWithXRP(amount) {
+async function makePaymentWithXRP(amount, domain) {
   const domainRef = db.collection("domains");
   const userRef = db.collection("users").doc(auth.currentUser.email);
   const doc = await userRef.get();
@@ -128,10 +128,7 @@ async function makePaymentWithXRP(amount) {
       confirmButtonText: "OK",
     }).then((result) => {
       if (result.isConfirmed) {
-       
-      }
-    });
-    domainRef
+          domainRef
     .add({
       domain: domain,
       email: auth.currentUser.email,
@@ -158,8 +155,13 @@ async function makePaymentWithXRP(amount) {
         }</b>`,
         icon: "success",
         confirmButtonText: "OK",
+      }).then(() => {
+         window.location.reload();
       });
     });
+      }
+    });
+
   }
 }
 
