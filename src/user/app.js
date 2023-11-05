@@ -335,6 +335,7 @@ const getUserData = async (user) => {
     const data = doc.data();
     return data;
   }
+  
 };
 
 function handleSignOut() {
