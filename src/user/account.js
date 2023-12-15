@@ -8,21 +8,21 @@ import {
   const PUBLIC_SERVER = "wss://xrplcluster.com/";
   const TEST_SERVER = "wss://s.altnet.rippletest.net:51233";
   const XRPLclient = new xrpl.Client(TEST_SERVER);
-  const username = document.getElementById("username");
-  const usereamil = document.getElementById("useremail");
-  const walletid = document.getElementById("walletid");
-  const walletseed = document.getElementById("seed");
-  const walletpubkey = document.getElementById("pubkey");
-  const walletprk = document.getElementById("prkey");
-  const balance = document.getElementById("balance");
-  const balance2 = document.getElementById("balance2");
-  const usericon = document.getElementById("usericon");
-  const totaldomains = document.getElementById("totaldomains");
-  const logoutButton = document.getElementById("logoutbtn");
-  const fundwalletBtn = document.getElementById("fundwallet");
-  const createwalletBtn = document.getElementById("connectwallet");
-  const menuToggle = document.getElementById("menu-toggle");
-  const mobileMenu = document.getElementById("mobile-menu");
+  const username = document.querySelector("#username");
+  const usereamil = document.querySelector("#useremail");
+  const walletid = document.querySelector("#walletid");
+  const walletseed = document.querySelector("#seed");
+  const walletpubkey = document.querySelector("#pubkey");
+  const walletprk = document.querySelector("#prkey");
+  const balance = document.querySelector("#balance");
+  const balance2 = document.querySelector("#balance2");
+  const usericon = document.querySelector("#usericon");
+  const totaldomains = document.querySelector("#totaldomains");
+  const logoutButton = document.querySelector("#logoutbtn");
+  const fundwalletBtn = document.querySelector("#fundwallet");
+  const createwalletBtn = document.querySelector("#connectwallet");
+  const menuToggle = document.querySelector("#menu-toggle");
+  const mobileMenu = document.querySelector("#mobile-menu");
   
   logoutButton.addEventListener("click", handleSignOut);
   

@@ -8,13 +8,13 @@ const db = firebase.firestore();
 const PUBLIC_SERVER = "wss://xrplcluster.com/";
 const TEST_SERVER = "wss://s.altnet.rippletest.net:51233";
 const XRPLclient = new xrpl.Client(TEST_SERVER);
-const balance = document.getElementById("balance");
-const logoutButton = document.getElementById("logoutbtn");
-const fundwalletBtn = document.getElementById("fundwallet");
-const createwalletBtn = document.getElementById("connectwallet");
-const transactiontableBody = document.getElementById("transactiontable-body");
-const menuToggle = document.getElementById("menu-toggle");
-const mobileMenu = document.getElementById("mobile-menu");
+const balance = document.querySelector("#balance");
+const logoutButton = document.querySelector("#logoutbtn");
+const fundwalletBtn = document.querySelector("#fundwallet");
+const createwalletBtn = document.querySelector("#connectwallet");
+const transactiontableBody = document.querySelector("#transactiontable-body");
+const menuToggle = document.querySelector("#menu-toggle");
+const mobileMenu = document.querySelector("#mobile-menu");
 
 logoutButton.addEventListener("click", handleSignOut);
 
