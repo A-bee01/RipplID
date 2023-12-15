@@ -1,17 +1,38 @@
+/**
+ * @fileoverview This file contains the JavaScript code for the application logic of the RipplID project.
+ * It includes functions for handling user authentication, interacting with the Firebase Firestore database,
+ * connecting to the XRPL (XRP Ledger) test server, and performing various operations such as searching and registering domains,
+ * making payments with XRP, creating wallets, and retrieving user data.
+ * 
+ * @author [emejulucodes]
+ * @version 1.0
+ */
 import {
   signOut,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 
 const auth = firebase.auth();
+/**
+ * Firebase Firestore database instance.
+ * @type {firebase.firestore.Firestore}
+ */
 const db = firebase.firestore();
 const PUBLIC_SERVER = "wss://xrplcluster.com/";
+/**
+ * The test server URL for the application.
+ * @type {string}
+ */
 const TEST_SERVER = "wss://s.altnet.rippletest.net:51233";
 const XRPLclient = new xrpl.Client(TEST_SERVER);
 const balance = document.querySelector("#balance");
 const searchdomain = document.querySelector("#searchdomain");
 const logoutButton = document.querySelector("#logoutbtn");
 const fundwalletBtn = document.querySelector("#fundwallet");
+/**
+ * Button element for creating a wallet.
+ * @type {HTMLElement}
+ */
 const createwalletBtn = document.querySelector("#connectwallet");
 const menuToggle = document.querySelector("#menu-toggle");
 const mobileMenu = document.querySelector("#mobile-menu");
@@ -22,9 +43,14 @@ searchdomain.addEventListener("submit", (e) => {
   e.preventDefault();
   const domain = searchdomain.querySelector("input").value;
   //chek if domain is valid and ends with .ppl
+  /**
+   * Regular expression for validating domain names.
+   * @type {RegExp}
+   */
   const domainRegex = new RegExp(
     /^(?=.{1,254}$)((?=.{1,63}\.)[a-zA-Z0-9_](?:(?:[a-zA-Z0-9_]|-){0,61}[a-zA-Z0-9_])?\.[ppl]{3})$/
   );
+  //If domain is invalid
   if (!domainRegex.test(domain)) {
     swal.fire({
       title: "Invalid domain",
@@ -48,6 +74,13 @@ createwalletBtn.addEventListener("click", () => {
   createWallet();
 });
 
+/**
+ * Searches for a domain in the "domains" collection and fetches the domain information.
+ * If the domain is available, prompts the user to register it.
+ * If the domain is already taken, displays the information of the user who registered it.
+ * @param {string} domain - The domain to search for.
+ * @returns {Promise<void>} - A promise that resolves when the search and fetch operation is complete.
+ */
 async function searchAndFetchDomain(domain) {
   const domainRef = db.collection("domains");
   //check if someone has already registered the domain
@@ -100,6 +133,12 @@ async function searchAndFetchDomain(domain) {
 }
   
 
+/**
+ * Makes a payment with XRP.
+ * @param {number} amount - The amount of XRP to be paid.
+ * @param {string} domain - The domain to be registered.
+ * @returns {Promise<void>} - A promise that resolves when the payment is successful.
+ */
 async function makePaymentWithXRP(amount, domain) {
   const domainRef = db.collection("domains");
   const userRef = db.collection("users").doc(auth.currentUser.email);
@@ -169,10 +208,20 @@ async function makePaymentWithXRP(amount, domain) {
   }
 }
 
+/**
+ * Connects to XRPL.
+ * @async
+ * @function connectXRPL
+ * @returns {Promise<void>}
+ */
 async function connectXRPL() {
   await XRPLclient.connect();
 }
 
+/**
+ * Funds the user's wallet with XRP.
+ * @returns {Promise<void>} A promise that resolves when the wallet is funded.
+ */
 async function fundWalletWithXRP() {
   const userRef = db.collection("users").doc(auth.currentUser.email);
   const doc = await userRef.get();
@@ -191,6 +240,10 @@ async function fundWalletWithXRP() {
   }
 }
 
+/**
+ * Retrieves the balance of the user's account and performs necessary actions based on the balance.
+ * @returns {Promise<void>} A promise that resolves when the balance retrieval and actions are completed.
+ */
 async function getBalance() {
   try {
     const userRef = db.collection("users").doc(auth.currentUser.email);
@@ -236,6 +289,11 @@ async function getBalance() {
   }
 }
 
+/**
+ * Creates a wallet for the current user.
+ * If the user doesn't have a wallet, it generates a new wallet and saves the wallet details in the database.
+ * If the user already has a wallet, it copies the wallet address to the clipboard.
+ */
 async function createWallet() {
   const userRef = db.collection("users").doc(auth.currentUser.email);
   const doc = await userRef.get();
@@ -296,6 +354,11 @@ async function createWallet() {
   }
 }
 
+/**
+ * Checks if the user is authenticated.
+ * @param {Object} user - The user object.
+ * @returns {Object} - The user object if authenticated, otherwise redirects to the login page.
+ */
 function checkAuth(user) {
   if (user) {
     return user;
@@ -328,6 +391,11 @@ onAuthStateChanged(auth, async function (user) {
 });
 
 // get user data from firestore
+/**
+ * Retrieves user data from the database.
+ * @param {Object} user - The user object.
+ * @returns {Promise<Object|null>} - The user data or null if user is not provided or document does not exist.
+ */
 const getUserData = async (user) => {
   if (!user) {
     return null;
@@ -345,6 +413,9 @@ const getUserData = async (user) => {
   
 };
 
+/**
+ * Handles the sign out functionality.
+ */
 function handleSignOut() {
   signOut(auth)
     .then(() => {
