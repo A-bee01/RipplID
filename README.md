@@ -19,11 +19,9 @@
 - [📍 Overview](#-overview)
 - [📦 Features](#-features)
 - [📂 repository Structure](#-repository-structure)
-- [⚙️ Modules](#modules)
 - [🚀 Getting Started](#-getting-started)
     - [🔧 Installation](#-installation)
     - [🤖 Running RipplID](#-running-RipplID)
-    - [🧪 Tests](#-tests)
 - [🛣 Roadmap](#-roadmap)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
@@ -193,7 +191,16 @@ This project is protected under the [SELECT-A-LICENSE](https://choosealicense.co
 
 ## 👏 Acknowledgments
 
-- List any resources, contributors, inspiration, etc. here.
+- [XRP Ledger](https://xrpl.org/)
+- [Interledger Protocol](https://interledger.org/)
+- [XRPLS](https://xrpl-labs.com/xrpls/)
+- [Firebase](https://firebase.google.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [VS Code](https://code.visualstudio.com/)
+- [Figma](https://www.figma.com/)
+- [Skillicons](https://skillicons.dev/)
+- [GitHub](https://github.com/)
+- [MIT](https://choosealicense.com/licenses/mit/)
 
 [**Return**](#Top)
 
