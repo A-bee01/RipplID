@@ -1,19 +1,16 @@
+<!---->
+
 <div align="center">
-<h1 align="center">
-<img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" width="100" />
-<br>XRPLS-NAMING-SERICE</h1>
-<h3>◦ HTTPStatus Exception: 404</h3>
-<h3>◦ Developed with the software and tools below.</h3>
+    <h1>RipplID</h1>
+    <h3>A naming service for the XRP Ledger.</h3>
+    <h3>◦ Developed with the software and tools below.</h3>
+</div>
 
 <p align="center">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=flat&logo=JavaScript&logoColor=black" alt="JavaScript" />
-<img src="https://img.shields.io/badge/HTML5-E34F26.svg?style=flat&logo=HTML5&logoColor=white" alt="HTML5" />
+  <a href="https://skillicons.dev">
+    <img src=https://skillicons.dev/icons?i=html,css,javascript,tailwind,firebase,github,vscode,figma alt="RipplID">
+  </a>
 </p>
-<img src="https://img.shields.io/github/license/emejulucodes/XRPLS-Naming-Serice?style=flat&color=5D6D7E" alt="GitHub license" />
-<img src="https://img.shields.io/github/last-commit/emejulucodes/XRPLS-Naming-Serice?style=flat&color=5D6D7E" alt="git-last-commit" />
-<img src="https://img.shields.io/github/commit-activity/m/emejulucodes/XRPLS-Naming-Serice?style=flat&color=5D6D7E" alt="GitHub commit activity" />
-<img src="https://img.shields.io/github/languages/top/emejulucodes/XRPLS-Naming-Serice?style=flat&color=5D6D7E" alt="GitHub top language" />
-</div>
 
 ---
 
@@ -25,7 +22,7 @@
 - [⚙️ Modules](#modules)
 - [🚀 Getting Started](#-getting-started)
     - [🔧 Installation](#-installation)
-    - [🤖 Running XRPLS-Naming-Serice](#-running-XRPLS-Naming-Serice)
+    - [🤖 Running RipplID](#-running-RipplID)
     - [🧪 Tests](#-tests)
 - [🛣 Roadmap](#-roadmap)
 - [🤝 Contributing](#-contributing)
@@ -37,13 +34,16 @@
 
 ## 📍 Overview
 
-HTTPStatus Exception: 404
+RipplID is a naming service for the XRP Ledger. It allows users to register a unique name to their XRP Ledger address. This name can then be used to send and receive payments on the XRP Ledger. RipplID is built on the XRP Ledger, and uses the XRP Ledger's decentralized exchange to facilitate payments. RipplID is a decentralized application (dApp) that runs on the XRPLS protocol. XRPLS is a protocol that allows developers to build dApps on the XRP Ledger. XRPLS is built on the Interledger Protocol (ILP), which allows for interoperability between different blockchains. XRPLS is built with the following software and tools:
 
 ---
 
 ## 📦 Features
 
-HTTPStatus Exception: 404
+- **Enhanced User Experience**: `RipplID seeks to improve the user experience on the XRP Ledger by replacing complex wallet addresses with human-readable names. Users can register names like "YourName.xrp" or "YourBrand.xrp" and associate them with their XRPL wallet addresses.`
+- **Simplified Payments**: `RipplID will simplify payments on the XRPL. Instead of sharing lengthy addresses, users can send funds to friends or businesses using their unique RipplID names, making transactions more user-friendly.`
+- **Personal Branding**: `RipplID allows individuals, businesses, and content creators to establish their presence on the XRPL by registering names like "YourBrand.xrp" or "YourUsername.xrp." This enables personal branding and recognition within the XRPL community.`
+- **Enhanced Security**: `RipplID will implement robust security measures to ensure the integrity of the naming system. Users will have control over their names and extensions, with options for multi-signature verification and domain management.`
 
 ---
 
@@ -51,7 +51,7 @@ HTTPStatus Exception: 404
 ## 📂 Repository Structure
 
 ```sh
-└── XRPLS-Naming-Serice/
+└── RipplID/
     ├── auth/
     │   ├── login/
     │   │   └── index.html
@@ -94,130 +94,46 @@ HTTPStatus Exception: 404
 ---
 
 
-## ⚙️ Modules
-
-<details closed><summary>Root</summary>
-
-| File                                                                                                     | Summary                   |
-| ---                                                                                                      | ---                       |
-| [connect-wallet.html](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/connect-wallet.html) | HTTPStatus Exception: 404 |
-| [support.html](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/support.html)               | HTTPStatus Exception: 404 |
-| [index.html](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/index.html)                   | HTTPStatus Exception: 404 |
-| [bundle.js](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/bundle.js)                     | HTTPStatus Exception: 404 |
-| [style.css](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/style.css)                     | HTTPStatus Exception: 404 |
-
-</details>
-
-<details closed><summary>Account</summary>
-
-| File                                                                                                | Summary                   |
-| ---                                                                                                 | ---                       |
-| [index.html](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/user/account/index.html) | HTTPStatus Exception: 404 |
-
-</details>
-
-<details closed><summary>Dashboard</summary>
-
-| File                                                                                                  | Summary                   |
-| ---                                                                                                   | ---                       |
-| [index.html](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/user/dashboard/index.html) | HTTPStatus Exception: 404 |
-
-</details>
-
-<details closed><summary>Transactions</summary>
-
-| File                                                                                                     | Summary                   |
-| ---                                                                                                      | ---                       |
-| [index.html](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/user/transactions/index.html) | HTTPStatus Exception: 404 |
-
-</details>
-
-<details closed><summary>Signup</summary>
-
-| File                                                                                               | Summary                   |
-| ---                                                                                                | ---                       |
-| [index.html](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/auth/signup/index.html) | HTTPStatus Exception: 404 |
-
-</details>
-
-<details closed><summary>Login</summary>
-
-| File                                                                                              | Summary                   |
-| ---                                                                                               | ---                       |
-| [index.html](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/auth/login/index.html) | HTTPStatus Exception: 404 |
-
-</details>
-
-<details closed><summary>User</summary>
-
-| File                                                                                                      | Summary                   |
-| ---                                                                                                       | ---                       |
-| [app.js](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/src/user/app.js)                   | HTTPStatus Exception: 404 |
-| [transactions.js](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/src/user/transactions.js) | HTTPStatus Exception: 404 |
-| [account.js](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/src/user/account.js)           | HTTPStatus Exception: 404 |
-
-</details>
-
-<details closed><summary>Auth</summary>
-
-| File                                                                                          | Summary                   |
-| ---                                                                                           | ---                       |
-| [signin.js](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/src/auth/signin.js) | HTTPStatus Exception: 404 |
-| [signup.js](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/src/auth/signup.js) | HTTPStatus Exception: 404 |
-
-</details>
-
-<details closed><summary>Config</summary>
-
-| File                                                                                                              | Summary                   |
-| ---                                                                                                               | ---                       |
-| [firebase-config.js](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/src/config/firebase-config.js) | HTTPStatus Exception: 404 |
-
-</details>
-
----
-
 ## 🚀 Getting Started
 
 ***Dependencies***
 
 Please ensure you have the following dependencies installed on your system:
 
-`- ℹ️ Dependency 1`
+`- Node.js`
 
-`- ℹ️ Dependency 2`
+`- Firebase CLI`
 
-`- ℹ️ ...`
+`- Git`
+
+`- VS Code`
 
 ### 🔧 Installation
 
-1. Clone the XRPLS-Naming-Serice repository:
+1. Clone the RipplID repository:
 ```sh
-git clone https://github.com/emejulucodes/XRPLS-Naming-Serice
+git clone https://github.com/emejulucodes/RipplID
 ```
 
 2. Change to the project directory:
 ```sh
-cd XRPLS-Naming-Serice
+cd RipplID
 ```
 
 3. Install the dependencies:
 ```sh
-► INSERT-TEXT
+run npm install
 ```
 
-### 🤖 Running XRPLS-Naming-Serice
+### 🤖 Running RipplID
 
 ```sh
-► INSERT-TEXT
+► Open the firebase-config.js file and add your Firebase project credentials.
 ```
 
-### 🧪 Tests
 ```sh
-► INSERT-TEXT
+► On vscode, open the index.html file and click the "Go Live" button on the bottom right corner.
 ```
-
----
 
 
 ## 🛣 Project Roadmap
@@ -233,9 +149,9 @@ cd XRPLS-Naming-Serice
 
 Contributions are welcome! Here are several ways you can contribute:
 
-- **[Submit Pull Requests](https://github.com/emejulucodes/XRPLS-Naming-Serice/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
-- **[Join the Discussions](https://github.com/emejulucodes/XRPLS-Naming-Serice/discussions)**: Share your insights, provide feedback, or ask questions.
-- **[Report Issues](https://github.com/emejulucodes/XRPLS-Naming-Serice/issues)**: Submit bugs found or log feature requests for EMEJULUCODES.
+- **[Submit Pull Requests](https://github.com/emejulucodes/RipplID/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
+- **[Join the Discussions](https://github.com/emejulucodes/RipplID/discussions)**: Share your insights, provide feedback, or ask questions.
+- **[Report Issues](https://github.com/emejulucodes/RipplID/issues)**: Submit bugs found or log feature requests for EMEJULUCODES.
 
 #### *Contributing Guidelines*
 
@@ -282,4 +198,3 @@ This project is protected under the [SELECT-A-LICENSE](https://choosealicense.co
 [**Return**](#Top)
 
 ---
-
