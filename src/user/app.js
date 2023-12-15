@@ -62,17 +62,18 @@ searchdomain.addEventListener("submit", (e) => {
   searchAndFetchDomain(domain);
 });
 
-menuToggle.addEventListener("click", () => {
-  mobileMenu.classList.toggle("hidden");
-});
+// Add event listeners to the buttons that make up the mobile menu. This is called when the user clicks on one of the buttons
+  menuToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
 
-fundwalletBtn.addEventListener("click", () => {
-  fundWalletWithXRP();
-});
+  fundwalletBtn.addEventListener("click", () => {
+    fundWalletWithXRP();
+  });
 
-createwalletBtn.addEventListener("click", () => {
-  createWallet();
-});
+  createwalletBtn.addEventListener("click", () => {
+    createWallet();
+  });
 
 /**
  * Searches for a domain in the "domains" collection and fetches the domain information.
@@ -89,6 +90,12 @@ async function searchAndFetchDomain(domain) {
     .get()
     .then(async (querySnapshot) => {
       if (querySnapshot.empty) {
+/* The above code is displaying a pop-up dialog using the SweetAlert library. The dialog shows the
+availability of a domain and the amount required to register it. If the user clicks on the
+"Register" button, it checks if the user has a wallet and sufficient balance. If the user doesn't
+have a wallet, a warning message is displayed. If the user has insufficient funds, another warning
+message is displayed. Otherwise, it calls the function makePaymentWithXRP to make a payment of 10
+XRP for the domain. */
         swal
           .fire({
             title: "Domain available",
@@ -223,6 +230,10 @@ async function connectXRPL() {
  * @returns {Promise<void>} A promise that resolves when the wallet is funded.
  */
 async function fundWalletWithXRP() {
+/* The above code is checking if a user has a wallet ID stored in the database. If the wallet ID is
+null, it displays a warning message using the Swal (SweetAlert) library, prompting the user to
+create a wallet. If the wallet ID is not null, it displays the wallet ID in a formatted title and
+provides instructions to send XRP to the user's address to fund the wallet. */
   const userRef = db.collection("users").doc(auth.currentUser.email);
   const doc = await userRef.get();
   if (doc.data().walletid == null) {
@@ -254,6 +265,11 @@ async function getBalance() {
       ledger_index: "validated",
     });
     //compare balance to check if new balance is greater than old balance
+/* The above code is checking if the difference between the account balance
+(account.result.account_data.Balance) and 10,000,000,000 is greater than the balance stored in the
+"doc" object (doc.data().balance). If the condition is true, it displays a success message using the
+swal.fire() function, updates the balance in the userRef object, adds a new transaction to the
+"transactions" collection in the database, and logs the account balance to the console. */
     if (
       account.result.account_data.Balance - 10000000000 >
       doc.data().balance
@@ -397,6 +413,7 @@ onAuthStateChanged(auth, async function (user) {
  * @returns {Promise<Object|null>} - The user data or null if user is not provided or document does not exist.
  */
 const getUserData = async (user) => {
+  /* The above code is checking if a user exists and retrieving their data from a Firestore database. */
   if (!user) {
     return null;
   }
