@@ -21,14 +21,14 @@ logoutButton.addEventListener("click", handleSignOut);
 searchdomain.addEventListener("submit", (e) => {
   e.preventDefault();
   const domain = searchdomain.querySelector("input").value;
-  //chek if domain is valid and ends with .xrp
+  //chek if domain is valid and ends with .ppl
   const domainRegex = new RegExp(
-    /^(?=.{1,254}$)((?=.{1,63}\.)[a-zA-Z0-9_](?:(?:[a-zA-Z0-9_]|-){0,61}[a-zA-Z0-9_])?\.[xrp]{3})$/
+    /^(?=.{1,254}$)((?=.{1,63}\.)[a-zA-Z0-9_](?:(?:[a-zA-Z0-9_]|-){0,61}[a-zA-Z0-9_])?\.[ppl]{3})$/
   );
   if (!domainRegex.test(domain)) {
     swal.fire({
       title: "Invalid domain",
-      text: "Please enter a valid domain, only .xrp domains are allowed",
+      text: "Please enter a valid domain, only .ppl domains are allowed",
       icon: "warning",
     });
     return;
