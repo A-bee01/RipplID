@@ -228,6 +228,7 @@ async function getBalance() {
     balance.textContent = account.result.account_data.Balance - 10000000000;
   } catch (error) {
     console.error(error);
+    balance.textContent = "0";
   }
 }
 
