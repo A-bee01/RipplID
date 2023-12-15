@@ -11,11 +11,11 @@ import {
 
 const auth = firebase.auth();
 const db = firebase.firestore();
-const GooglesignInButton = document.getElementById("google-sign-in");
-const form = document.getElementById("form");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const signUpButton = document.getElementById("login");
+const GooglesignInButton = document.querySelector("#google-sign-in");
+const form = document.querySelector("#form");
+const emailInput = document.querySelector("#email");
+const passwordInput = document.querySelector("#password");
+const signUpButton = document.querySelector("#login");
 
 /**
  * Function called when clicking the Login/Logout button.

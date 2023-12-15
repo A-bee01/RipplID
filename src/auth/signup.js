@@ -13,12 +13,11 @@ import {
 const auth = firebase.auth();
 const db = firebase.firestore();
 const form = document.getElementById("form");
-const emailInput = document.getElementById("email");
-const usernameInput = document.getElementById("username");
-const passwordInput = document.getElementById("password");
-const googleSignInButton = document.getElementById(
-  "google-sign-in");
-const signUpButton = document.getElementById("register");
+const emailInput = document.querySelector("#email");
+const usernameInput = document.querySelector("#username");
+const passwordInput = document.querySelector("#password");
+const googleSignInButton = document.querySelector("#google-sign-in");
+const signUpButton = document.querySelector("#register");
 
 /**
  * Handles the sign up button press.
