@@ -1,11 +1,12 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyDj_1vWuONl5K8XfEnQ4iHHDQYr6BBOd5g",
-    authDomain: "xrpl-ns.firebaseapp.com",
-    projectId: "xrpl-ns",
-    storageBucket: "xrpl-ns.appspot.com",
-    messagingSenderId: "118935206366",
-    appId: "1:118935206366:web:7f5bb38cc236fecf9e454f",
-    measurementId: "G-JGECZ5R0ND",
-  };
-  
-firebase.initializeApp(firebaseConfig);
+  apiKey: "AIzaSyAg_duJHI5WZxInEmIfr3DqKsTTw5eJYvk",
+  authDomain: "ripplid-ns.firebaseapp.com",
+  projectId: "ripplid-ns",
+  storageBucket: "ripplid-ns.appspot.com",
+  messagingSenderId: "346793201847",
+  appId: "1:346793201847:web:46dcd3b3311da7df2b3d32",
+  measurementId: "G-HHRNPNB257"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
