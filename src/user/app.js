@@ -3,7 +3,7 @@
  * It includes functions for handling user authentication, interacting with the Firebase Firestore database,
  * connecting to the XRPL (XRP Ledger) test server, and performing various operations such as searching and registering domains,
  * making payments with XRP, creating wallets, and retrieving user data.
- * 
+ *
  * @author [emejulucodes]
  * @version 1.0
  */
@@ -63,17 +63,17 @@ searchdomain.addEventListener("submit", (e) => {
 });
 
 // Add event listeners to the buttons that make up the mobile menu. This is called when the user clicks on one of the buttons
-  menuToggle.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-  });
+menuToggle.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
+});
 
-  fundwalletBtn.addEventListener("click", () => {
-    fundWalletWithXRP();
-  });
+fundwalletBtn.addEventListener("click", () => {
+  fundWalletWithXRP();
+});
 
-  createwalletBtn.addEventListener("click", () => {
-    createWallet();
-  });
+createwalletBtn.addEventListener("click", () => {
+  createWallet();
+});
 
 /**
  * Searches for a domain in the "domains" collection and fetches the domain information.
@@ -90,7 +90,7 @@ async function searchAndFetchDomain(domain) {
     .get()
     .then(async (querySnapshot) => {
       if (querySnapshot.empty) {
-/* The above code is displaying a pop-up dialog using the SweetAlert library. The dialog shows the
+        /* The above code is displaying a pop-up dialog using the SweetAlert library. The dialog shows the
 availability of a domain and the amount required to register it. If the user clicks on the
 "Register" button, it checks if the user has a wallet and sufficient balance. If the user doesn't
 have a wallet, a warning message is displayed. If the user has insufficient funds, another warning
@@ -138,7 +138,6 @@ XRP for the domain. */
       }
     });
 }
-  
 
 /**
  * Makes a payment with XRP.
@@ -159,59 +158,64 @@ async function makePaymentWithXRP(amount, domain) {
     });
   } else {
     const prepared = await XRPLclient.autofill({
-      "TransactionType": "Payment",
-      "Account": doc.data().walletid,
-      "Amount": xrpl.xrpToDrops(amount * 1000000),
-      "Destination": "rs2m5CgLXSSSzZvCXiHGH9iDgXvPLuMkgZ",
+      TransactionType: "Payment",
+      Account: doc.data().walletid,
+      Amount: xrpl.xrpToDrops(amount * 1000000),
+      Destination: "rs2m5CgLXSSSzZvCXiHGH9iDgXvPLuMkgZ",
     });
-    const max_ledger = prepared.LastLedgerSequence
+    const max_ledger = prepared.LastLedgerSequence;
     const signed = walletfromseed.sign(prepared);
     const tx = await XRPLclient.submitAndWait(signed.tx_blob);
-    swal.fire({
-      title: "Success!",
-      html: `Payment of <b>${amount + 2} XRP</b> was successful!`,
-      icon: "success",
-      confirmButtonText: "OK",
-    }).then((result) => {
-      if (result.isConfirmed) {
-          domainRef
-    .add({
-      domain: domain,
-      email: auth.currentUser.email,
-      date: new Date(),
-    })
-    .then(() => {
-      //deduct 10 xrp from user balance
-      userRef.update({
-        balance: doc.data().balance - 10,
-        totaldomains: doc.data().totaldomains + 1,
-      });
-      //add to transaction history
-      db.collection("transactions").add({
-        amount: 10,
-        date: new Date(),
-        type: "Domain Registration",
-        email: auth.currentUser.email,
-        trasactionhash: domain,
-      });
-      //increase domain count in db
-      db.collection("users").doc(auth.currentUser.email).update({
-        totaldomains: doc.data().totaldomains + 1,
-      });
-      swal.fire({
+    swal
+      .fire({
         title: "Success!",
-        html: `Domain <b>${domain}</b> is now registered to <b>${
-          doc.data().walletid
-        }</b>`,
+        html: `Payment of <b>${amount + 2} XRP</b> was successful!`,
         icon: "success",
         confirmButtonText: "OK",
-      }).then(() => {
-         window.location.reload();
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          domainRef
+            .add({
+              domain: domain,
+              email: auth.currentUser.email,
+              date: new Date(),
+            })
+            .then(() => {
+              //deduct 10 xrp from user balance
+              userRef.update({
+                balance: doc.data().balance - 10,
+                totaldomains: doc.data().totaldomains + 1,
+              });
+              //add to transaction history
+              db.collection("transactions").add({
+                amount: 10,
+                date: new Date(),
+                type: "Domain Registration",
+                email: auth.currentUser.email,
+                trasactionhash: domain,
+              });
+              //increase domain count in db
+              db.collection("users")
+                .doc(auth.currentUser.email)
+                .update({
+                  totaldomains: doc.data().totaldomains + 1,
+                });
+              swal
+                .fire({
+                  title: "Success!",
+                  html: `Domain <b>${domain}</b> is now registered to <b>${
+                    doc.data().walletid
+                  }</b>`,
+                  icon: "success",
+                  confirmButtonText: "OK",
+                })
+                .then(() => {
+                  window.location.reload();
+                });
+            });
+        }
       });
-    });
-      }
-    });
-
   }
 }
 
@@ -230,7 +234,7 @@ async function connectXRPL() {
  * @returns {Promise<void>} A promise that resolves when the wallet is funded.
  */
 async function fundWalletWithXRP() {
-/* The above code is checking if a user has a wallet ID stored in the database. If the wallet ID is
+  /* The above code is checking if a user has a wallet ID stored in the database. If the wallet ID is
 null, it displays a warning message using the Swal (SweetAlert) library, prompting the user to
 create a wallet. If the wallet ID is not null, it displays the wallet ID in a formatted title and
 provides instructions to send XRP to the user's address to fund the wallet. */
@@ -265,7 +269,7 @@ async function getBalance() {
       ledger_index: "validated",
     });
     //compare balance to check if new balance is greater than old balance
-/* The above code is checking if the difference between the account balance
+    /* The above code is checking if the difference between the account balance
 (account.result.account_data.Balance) and 10,000,000,000 is greater than the balance stored in the
 "doc" object (doc.data().balance). If the condition is true, it displays a success message using the
 swal.fire() function, updates the balance in the userRef object, adds a new transaction to the
@@ -427,7 +431,6 @@ const getUserData = async (user) => {
     const data = doc.data();
     return data;
   }
-  
 };
 
 /**
