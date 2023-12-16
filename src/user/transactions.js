@@ -63,31 +63,31 @@ async function getAndDisplayTransactions() {
   transactions.result.transactions.forEach((transaction) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-            <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm text-white-900">${
-              transaction.tx.TransactionType
-            }</div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-  <div class="text-sm text-white-900">${transaction.tx.Amount - 10000000000} XRP</div>
+    <td class="px-6 py-4 whitespace-nowrap">
+    <div class="text-sm text-white-900">
+      ${transaction.tx.TransactionType}
+    </div>
   </td>
   <td class="px-6 py-4 whitespace-nowrap">
-  <div class="text-sm text-white-900">${convertTimestampToReadableDate(
-    transaction.tx.date
-  )}</div>
-    </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-  <div class="text-sm text-white-900">${transaction.tx.Account}</div>
-  </td> 
-   <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm text-white-900">${
-              transaction.tx.Destination
-            }</div>
-            </td>
-  <td class="px-6 py-4 whitespace-nowrap">
-  <div class="text-sm text-white-900">${transaction.tx.hash}</div>
+    <div class="text-sm text-white-900">
+      ${ transaction.tx.Amount - 10000000000 } XRP
+    </div>
   </td>
-        `;
+  <td class="px-6 py-4 whitespace-nowrap">
+    <div class="text-sm text-white-900">
+      ${convertTimestampToReadableDate( transaction.tx.date )}
+    </div>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap">
+    <div class="text-sm text-white-900">${transaction.tx.Account}</div>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap">
+    <div class="text-sm text-white-900">${ transaction.tx.Destination }</div>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap">
+    <div class="text-sm text-white-900">${transaction.tx.hash}</div>
+  </td>
+    `;
     transactiontableBody.appendChild(tr);
   });
 }
