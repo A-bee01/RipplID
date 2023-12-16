@@ -26,6 +26,13 @@ function handleSignUp() {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
   });
+  Swal.fire({
+    title: "Please wait...",
+    showConfirmButton: false,
+    willOpen: () => {
+      Swal.showLoading();
+    },
+  });
   const email = emailInput.value;
   const password = passwordInput.value;
   if (email.length < 4) {
