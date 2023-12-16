@@ -25,6 +25,8 @@ const PUBLIC_SERVER = "wss://xrplcluster.com/";
  */
 const TEST_SERVER = "wss://s.altnet.rippletest.net:51233";
 const XRPLclient = new xrpl.Client(TEST_SERVER);
+
+
 const balance = document.querySelector("#balance");
 const searchdomain = document.querySelector("#searchdomain");
 const logoutButton = document.querySelector("#logoutbtn");
@@ -83,6 +85,18 @@ createwalletBtn.addEventListener("click", () => {
  * @returns {Promise<void>} - A promise that resolves when the search and fetch operation is complete.
  */
 async function searchAndFetchDomain(domain) {
+  Swal.fire({
+    title: "Searching...",
+    html: `Searching for <b>${domain}</b>`,
+    icon: "info",
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
+    showConfirmButton: false,
+    willOpen: () => {
+      Swal.showLoading();
+    },
+  });
   const domainRef = db.collection("domains");
   //check if someone has already registered the domain
   domainRef
