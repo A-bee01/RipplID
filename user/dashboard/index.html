@@ -46,7 +46,8 @@
           </button>
           <nav
             id="mobile-menu"
-            class="absolute left-0 top-full flex flex-col bg-white p-4 gap-4 border border-[#38b2ac] hidden" style="width: 150px;"
+            class="absolute left-0 top-full flex flex-col bg-white p-4 gap-4 border border-[#38b2ac] hidden"
+            style="width: 150px; z-index: 1000;"
           >
             <a class="text-gray-600" href="/user/account/">Account</a
             ><a class="text-gray-600" href="#" id="fundwallet"> Fund Wallet </a
@@ -80,11 +81,13 @@
                 d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
               ></path></svg
             ><span class="text-white">RipplID</span></a
-          ><a class="text-gray-400" href="/user/account/"> Account </a
-          ><div class="text-gray-400" id="fundwallet"> Fund Wallet </div
-          ><a class="text-gray-400" href="/user/send-funds/">Transfer Funds</a
-          ><a class="text-gray-400" href="/user/transactions/"> Transactions </a
-          ><div class="text-gray-400" id="logoutbtn"> Logout </div>
+          ><a class="text-gray-400" href="/user/account/"> Account </a>
+          <div class="text-gray-400" id="fundwallet">Fund Wallet</div>
+          <a class="text-gray-400" href="/user/send-funds/">Transfer Funds</a
+          ><a class="text-gray-400" href="/user/transactions/">
+            Transactions
+          </a>
+          <div class="text-gray-400" id="logoutbtn">Logout</div>
         </nav>
         <div class="flex items-center gap-4 md:gap-2 lg:gap-4">
           <div class="text-gray-400">Balance: <b id="balance">...</b> XRP</div>
@@ -98,8 +101,14 @@
       </header>
       <main class="flex flex-1 items-center justify-center p-4 md:p-10">
         <h1
-          class="text-3xl font-bold text-white absolute top-16 left-1/2 transform -translate-x-1/2 mt-8"
+          class="text-3xl font-bold text-white absolute top-20 left-1/2 transform -translate-x-1/2 mt-8"
           id="rz8kq8he2gc"
+          style="
+            font-family: 'Poppins', sans-serif;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+          "
         >
           RipplID
         </h1>
