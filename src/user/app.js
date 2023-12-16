@@ -119,6 +119,13 @@ XRP for the domain. */
           })
           .then(async (result) => {
             if (result.isConfirmed) {
+              Swal.fire({
+                title: "Please wait...",
+                showConfirmButton: false,
+                willOpen: () => {
+                  Swal.showLoading();
+                },
+              });
               const userRef = db
                 .collection("users")
                 .doc(auth.currentUser.email);
@@ -189,6 +196,13 @@ async function makePaymentWithXRP(amount, domain) {
       })
       .then((result) => {
         if (result.isConfirmed) {
+          Swal.fire({
+            title: "Finalizing...",
+            showConfirmButton: false,
+            willOpen: () => {
+              Swal.showLoading();
+            },
+          });
           domainRef
             .add({
               domain: domain,
