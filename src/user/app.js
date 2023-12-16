@@ -223,12 +223,6 @@ async function makePaymentWithXRP(amount, domain) {
                 email: auth.currentUser.email,
                 trasactionhash: domain,
               });
-              //increase domain count in db
-              db.collection("users")
-                .doc(auth.currentUser.email)
-                .update({
-                  totaldomains: doc.data().totaldomains + 1,
-                });
               swal
                 .fire({
                   title: "Success!",

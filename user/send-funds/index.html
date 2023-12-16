@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Account - RipplID</title>
+    <title>Send Funds - RipplID</title>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
     <script type="module" src="/src/config/firebase-config.js"></script>
@@ -14,7 +14,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/xrpl/build/xrpl-latest-min.js"></script>
     <script type="module" src="/src/user/account.js"></script>
-
   </head>
   <body class="bg-gray-800">
     <header
@@ -44,11 +43,10 @@
       </button>
       <nav
         id="mobile-menu"
-        class="absolute left-0 top-full flex flex-col bg-white p-4 gap-4 border border-[#38b2ac] hidden" style="width: 150px;"
+        class="absolute left-0 top-full flex flex-col bg-white p-4 gap-4 border border-[#38b2ac] hidden"
       >
         <a class="text-gray-600" href="/user/dashboard/">Dashboard </a
         ><a class="text-gray-600" href="#" id="fundwallet"> Fund Wallet </a
-        ><a class="text-gray-600" href="/user/send-funds/">Transfer Funds</a
         ><a class="text-gray-600" href="/user/transactions/">Transactions</a
         ><a class="text-gray-600" href="#" id="logoutbtn">Logout</a>
       </nav>
@@ -80,7 +78,6 @@
         ><span class="text-white">RipplID</span></a
       ><a class="text-gray-400" href="/user/dashboard/"> Dashboard </a
       ><a class="text-gray-400" href="#" id="fundwallet"> Fund Wallet </a
-      ><a class="text-gray-400" href="/user/send-funds/">Transfer Funds</a
       ><a class="text-gray-400" href="/user/transactions/"> Transactions </a
       ><a class="text-gray-400" href="#" id="logoutbtn"> Logout </a>
     </nav>
@@ -94,68 +91,48 @@
       </button>
     </div>
   </header>
-  <main class="flex flex-1 items-center justify-center p-20 md:p-10">
-     <div
-      class="border bg-gray-800 text-white max-w-md mx-auto p-6 rounded-lg shadow-lg"
-      data-v0-t="card"
-    >
-      <div class="flex items-center space-x-4">
-        <span
-          class="relative flex shrink-0 overflow-hidden rounded-full h-16 w-16"
-          ><span
-            class="flex h-full w-full items-center justify-center rounded-full bg-muted"
-            id="usericon"
-            ><img src="/src/images/loader/loader.gif" class="h-6 w-6" /></span
-          ></span
-        >
-        <div>
-          <h2 class="text-xl font-semibold" id="username"><img src="/src/images/loader/loader.gif" class="h-6 w-6" /></h2>
-          <p class="text-sm text-gray-400" id="useremail">.<img src="/src/images/loader/loader.gif" class="h-6 w-6" /></p>
-        </div>
-      </div>
-      <div class="mt-8">
-        <h3 class="text-lg font-semibold">Wallet Details</h3>
-        <div class="mt-4 space-y-4">
-          <div class="flex justify-between">
-            <span>Wallet Address:</span
-            ><span class="font-mono text-sm bg-gray-700 px-2 py-1 rounded" id="walletid"
-              ><img src="/src/images/loader/loader.gif" class="h-6 w-6" /></span
-            >
-          </div>
-          <div class="flex justify-between">
-            <span>Seed:</span
-            ><span class="font-mono text-sm bg-gray-700 px-2 py-1 rounded" id="seed"
-              ><img src="/src/images/loader/loader.gif" class="h-6 w-6" /></span
-            >
-          </div>
-          <div class="flex justify-between">
-            <span>Public Key:</span
-            ><span class="font-mono text-sm bg-gray-700 px-2 py-1 rounded" id="pubkey"
-              ><img src="/src/images/loader/loader.gif" class="h-6 w-6" /></span
-            >
-          </div>
-          <div class="flex justify-between">
-            <span>Private Key:</span
-            ><span class="font-mono text-sm bg-gray-700 px-2 py-1 rounded" id="prkey"
-              ><img src="/src/images/loader/loader.gif" class="h-6 w-6" /></span
-            >
-          </div>
-          <div class="flex justify-between">
-            <span>XRP Balance:</span><span><b id="balance2"><img src="/src/images/loader/loader.gif" class="h-6 w-6" /></b> XRP</span>
-          </div>
-          <div class="flex justify-between">
-            <span>Total RipplID Domains:</span><span id="totaldomains"><img src="/src/images/loader/loader.gif" class="h-6 w-6" /></span>
-          </div>
-        </div>
-      </div>
-      <button
-        class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full mt-8 text-gray-200 border-gray-300"
-        id="logoutbtn"
+  <br /> <br />
+    <main style="color: white;">
+      <div
+        class="rounded-lg border bg-card text-card-foreground shadow-sm mb-8"
+        data-v0-t="card"
       >
-        Logout
-      </button>
-    </div>
-  </main>
-   
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight">
+            Transfer Funds
+          </h3>
+        </div>
+        <div class="p-6">
+          <div class="space-y-4">
+            <div class="space-y-2">
+              <label
+                class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                for="domain-name"
+                >RipplID Name</label
+              ><input
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                id="domain-name"
+                placeholder="Enter user RipplID Name"
+              />
+            </div>
+            <div class="space-y-2">
+              <label
+                class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                for="amount"
+                >Amount</label
+              ><input
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                id="amount"
+                placeholder="Enter amount"
+                type="number"
+              />
+            </div>
+              <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full" style="background-color: green;" id="sendfunds">
+            Send Funds
+          </button>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

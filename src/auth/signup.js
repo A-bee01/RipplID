@@ -184,6 +184,7 @@ function addUserToFirestore(user) {
       isverified: user.emailVerified,
       photoURL: user.photoURL,
       displayName: usernameInput ? usernameInput.value : user.displayName,
+      totaldomains: 0,
     })
     .then(() => {
       console.log("Document successfully written!");
