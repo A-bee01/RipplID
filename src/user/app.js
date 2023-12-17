@@ -116,6 +116,10 @@ message is displayed. Otherwise, it calls the function makePaymentWithXRP to mak
 XRP for the domain. */
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Domain available",
             html: `<b>${domain}</b> <br> Amount: <b>10 XRP + 2 XRP Fee</b>`,
             icon: "info",
@@ -407,6 +411,10 @@ async function createWallet() {
         }
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Success!",
             text: "Wallet created successfully!",
             icon: "success",

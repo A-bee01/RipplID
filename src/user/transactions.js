@@ -196,6 +196,10 @@ async function createWallet() {
         }
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Success!",
             text: "Wallet created successfully!",
             icon: "success",

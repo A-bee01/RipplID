@@ -120,6 +120,10 @@ async function searchAndFetchUser(domain) {
       if (querySnapshot.empty) {
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Domain not found",
             html: `<b>${domain}</b> not found. <br> Please make sure you entered the correct domain name`,
             icon: "info",
@@ -136,6 +140,10 @@ async function searchAndFetchUser(domain) {
         const data = doc.data();
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: `${domain} found.`,
             html: `Wallet address: <b>${
               querySnapshot.docs[0].data().walletid
@@ -416,6 +424,10 @@ async function createWallet() {
         }
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Success!",
             text: "Wallet created successfully!",
             icon: "success",

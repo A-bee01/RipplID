@@ -58,6 +58,10 @@ function toggleSignInManual() {
       if (errorCode === "auth/account-exists-with-different-credential") {
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Error",
             text: "Account already exists with different credential",
             icon: "error",
@@ -68,6 +72,10 @@ function toggleSignInManual() {
       } else if (errorCode === "auth/invalid-login-credentials") {
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Error",
             text: "Invalid login credentials",
             icon: "error",
@@ -76,6 +84,10 @@ function toggleSignInManual() {
       } else if (errorCode === "auth/invalid-email") {
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Error",
             text: "Invalid email",
             icon: "error",
@@ -84,6 +96,10 @@ function toggleSignInManual() {
       } else if (errorCode === "auth/wrong-password") {
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Error",
             text: "Wrong password",
             icon: "error",
@@ -100,6 +116,10 @@ function toggleSignInManual() {
       } else if (errorCode === "auth/weak-password") {
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Error",
             text: "Weak password",
             icon: "error",
@@ -108,6 +128,10 @@ function toggleSignInManual() {
       } else if (errorCode === "auth/email-already-in-use") {
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Error",
             text: "Email already in use",
             icon: "error",
@@ -116,6 +140,10 @@ function toggleSignInManual() {
       } else if (errorCode === "auth/operation-not-allowed") {
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Error",
             text: "Operation not allowed",
             icon: "error",
@@ -124,6 +152,10 @@ function toggleSignInManual() {
       } else if (errorCode === "auth/weak-password") {
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Error",
             text: "Weak password",
             icon: "error",
@@ -132,6 +164,10 @@ function toggleSignInManual() {
       } else {
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Error",
             text: "Something went wrong",
             icon: "error",

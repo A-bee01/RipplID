@@ -195,6 +195,10 @@ function addUserToFirestore(user) {
       if (user.emailVerified) {
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Success!",
             text: "You have successfully registered!",
             icon: "success",
@@ -203,6 +207,10 @@ function addUserToFirestore(user) {
       } else {
         swal
           .fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showConfirmButton: false,
             title: "Success!",
             text: "You have successfully registered!\nPlease verify your email to login",
             icon: "success",
