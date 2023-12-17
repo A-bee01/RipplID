@@ -223,45 +223,51 @@ async function sendPaymentWithXRP(amount, domain) {
     Account: data.walletid,
     Amount: xrpl.xrpToDrops(amount * 1000000),
     Destination: walletfromseed.address,
-    flags: 2147483648,
   });
   const max_ledger = preparedTx.LastLedgerSequence;
   const signed = walletfromseed.sign(preparedTx);
-  const tx = await XRPLclient.submitAndWait(signed.tx_blob);
+  const tx = await XRPLclient.submit(signed.tx_blob);
     console.log(tx);
+  
+    if (tx.resultCode === "tesSUCCESS") {
         Swal.fire({
             title: "Success!",
-            html: `Payment of <b>${amount} XRP</b> to <b>${domain}</b> was successful.`,
+            html: `Payment of <b>${amount} XRP</b> to <b>${domain}</b> was successful!`,
             icon: "success",
             confirmButtonText: "OK",
             }).then((result) => {
             if (result.isConfirmed) {
                 Swal.close();
-                //ad to transaction history
-                db.collection("transactions").add({
-                    amount: amount,
-                    date: new Date(),
-                    type: "Payment",
-                    email: auth.currentUser.email,
-                    trasactionhash: tx.result.tx_json.hash,
-                });
-                //update balance
-                userRef.update({
-                    balance: data.balance - amount,
-                });
-                //update balance
-                receiverDoc.update({
-                    balance: receiverDoc.data().balance + amount,
-                });
-                //update domain
-                domainRef.doc(domainDoc.docs[0].id).update({
-                    email: auth.currentUser.email,
-                });
-                window.location.reload();
             }
         });
-
-
+        //update balance
+        userRef.update({
+            balance: data.balance - amount * 1000000,
+        });
+        receiverRef.update({
+            balance: receiverDoc.data().balance + amount * 1000000,
+        });
+        //add to transaction history
+        db.collection("transactions").add({
+            amount: amount * 1000000,
+            date: new Date(),
+            type: "Payment",
+            email: auth.currentUser.email,
+            trasactionhash: tx.result.tx_json.hash,
+        });
+        balance.textContent = data.balance - amount * 1000000;
+    } else {
+        Swal.fire({
+            title: "Error!",
+            html: `Payment of <b>${amount} XRP</b> to <b>${domain}</b> failed! <br> Please try again later`,
+            icon: "error",
+            confirmButtonText: "OK",
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.close();
+            }
+        });
+    }
 
 }
 
