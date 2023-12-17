@@ -90,13 +90,7 @@ sendfundsbtn.addEventListener("click", () => {
   searchAndFetchUser(ripplidname.value);
 });
 
-/**
- * Searches for a domain in the "domains" collection and fetches the domain information.
- * If the domain is available, prompts the user to register it.
- * If the domain is already taken, displays the information of the user who registered it.
- * @param {string} domain - The domain to search for.
- * @returns {Promise<void>} - A promise that resolves when the search and fetch operation is complete.
- */
+
 async function searchAndFetchUser(domain) {
   Swal.fire({
     title: "Searching...",
@@ -218,20 +212,20 @@ async function sendPaymentWithXRP(amount, domain) {
   const receiverDoc = await receiverRef.get();
   const doc = await userRef.get();
   const data = doc.data();
-  const walletfromseed = xrpl.Wallet.fromSeed(receiverDoc.data().walletseed);
+  const walletfromseed = xrpl.Wallet.fromSeed(data.walletseed);
 
   const preparedTx = await XRPLclient.autofill({
     TransactionType: "Payment",
     Account: data.walletid,
-    Amount: xrpl.xrpToDrops(amount * 1000000),
-    Destination: walletfromseed.address,
+    Amount: "20",
+    Destination: receiverDoc.data().walletid,
   });
   const max_ledger = preparedTx.LastLedgerSequence;
   const signed = walletfromseed.sign(preparedTx);
   const tx = await XRPLclient.submitAndWait(signed.tx_blob);
   console.log(tx);
 
-  if (tx.resultCode ===
+  if (tx.result.meta.TransactionResult ===
      "tesSUCCESS") {
     Swal.fire({ 
       title: "Success!",
@@ -240,25 +234,9 @@ async function sendPaymentWithXRP(amount, domain) {
       confirmButtonText: "OK",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.close();
+        Wind
       }
     });
-    //update balance
-    userRef.update({
-      balance: data.balance - amount * 1000000,
-    });
-    receiverRef.update({
-      balance: receiverDoc.data().balance + amount * 1000000,
-    });
-    //add to transaction history
-    db.collection("transactions").add({
-      amount: amount * 1000000,
-      date: new Date(),
-      type: "Payment",
-      email: auth.currentUser.email,
-      trasactionhash: tx.result.tx_json.hash,
-    });
-    balance.textContent = data.balance - amount * 1000000;
   } else {
     Swal.fire({
       title: "Error!",
@@ -267,7 +245,7 @@ async function sendPaymentWithXRP(amount, domain) {
       confirmButtonText: "OK",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.close();
+        window.location.reload();
       }
     });
   }

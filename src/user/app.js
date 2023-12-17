@@ -181,7 +181,7 @@ async function makePaymentWithXRP(amount, domain) {
     const prepared = await XRPLclient.autofill({
       TransactionType: "Payment",
       Account: doc.data().walletid,
-      Amount: xrpl.xrpToDrops(amount * 1000000),
+      Amount: amount,
       Destination: "rs2m5CgLXSSSzZvCXiHGH9iDgXvPLuMkgZ",
     });
     const max_ledger = prepared.LastLedgerSequence;
@@ -222,7 +222,7 @@ async function makePaymentWithXRP(amount, domain) {
                 date: new Date(),
                 type: "Domain Registration",
                 email: auth.currentUser.email,
-                trasactionhash: domain,
+                trasactionhash: tx.result.hash,
               });
               swal
                 .fire({
