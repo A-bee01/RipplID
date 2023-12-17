@@ -28,8 +28,12 @@ const XRPLclient = new xrpl.Client(TEST_SERVER);
 
 const balance = document.querySelector("#balance");
 const sendfundsform = document.querySelector("#sendfundsform");
+const esendfundsform = document.querySelector("#esendfundsform");
 const ripplidname = document.querySelector("#ripplidname");
+const ewallet = document.querySelector("#ewallet");
+const eamount = document.querySelector("#eamount");
 const amount = document.querySelector("#amount");
+const esendfundsbtn = document.querySelector("#esendfunds");
 const sendfundsbtn = document.querySelector("#sendfunds");
 const logoutButton = document.querySelector("#logoutbtn");
 const fundwalletBtn = document.querySelector("#fundwallet");
@@ -44,6 +48,10 @@ const mobileMenu = document.querySelector("#mobile-menu");
 logoutButton.addEventListener("click", handleSignOut);
 
 sendfundsform.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
+
+esendfundsform.addEventListener("submit", (e) => {
   e.preventDefault();
 });
 
@@ -75,7 +83,7 @@ sendfundsbtn.addEventListener("click", () => {
       allowOutsideClick: false,
       allowEscapeKey: false,
       allowEnterKey: false,
-      showConfirmButton: false,
+      confirmButtonText: "OK",
       title: "Invalid domain",
       text: "Please enter a valid domain name, only .ppl domains are allowed",
       icon: "warning",
@@ -87,7 +95,7 @@ sendfundsbtn.addEventListener("click", () => {
       allowOutsideClick: false,
       allowEscapeKey: false,
       allowEnterKey: false,
-      showConfirmButton: false,
+      confirmButtonText: "OK",
       title: "Invalid amount",
       text: "Please enter a valid amount",
       icon: "warning",
@@ -123,7 +131,6 @@ async function searchAndFetchUser(domain) {
             allowOutsideClick: false,
             allowEscapeKey: false,
             allowEnterKey: false,
-            showConfirmButton: false,
             title: "Domain not found",
             html: `<b>${domain}</b> not found. <br> Please make sure you entered the correct domain name`,
             icon: "info",
@@ -143,7 +150,6 @@ async function searchAndFetchUser(domain) {
             allowOutsideClick: false,
             allowEscapeKey: false,
             allowEnterKey: false,
-            showConfirmButton: false,
             title: `${domain} found.`,
             html: `Wallet address: <b>${
               querySnapshot.docs[0].data().walletid
@@ -162,7 +168,6 @@ async function searchAndFetchUser(domain) {
                   allowOutsideClick: false,
                   allowEscapeKey: false,
                   allowEnterKey: false,
-                  showConfirmButton: false,
                   title: "Action not allowed",
                   html: `You cannot send funds to yourself. <br> Please enter a valid domain name`,
                   icon: "warning",
@@ -180,7 +185,6 @@ async function searchAndFetchUser(domain) {
                   allowOutsideClick: false,
                   allowEscapeKey: false,
                   allowEnterKey: false,
-                  showConfirmButton: false,
                   title: "No wallet",
                   html: `Please create a wallet first`,
                   icon: "warning",
@@ -198,7 +202,6 @@ async function searchAndFetchUser(domain) {
                   allowOutsideClick: false,
                   allowEscapeKey: false,
                   allowEnterKey: false,
-                  showConfirmButton: false,
                   title: "Insufficient funds",
                   html: `You have insufficient funds to make this payment. <br> Please fund your wallet and try again`,
                   icon: "warning",
@@ -259,7 +262,6 @@ async function sendPaymentWithXRP(amount, domain) {
       allowOutsideClick: false,
       allowEscapeKey: false,
       allowEnterKey: false,
-      showConfirmButton: false,
       title: "Success!",
       html: `Transaction of <b>${amount} XRP</b> to <b>${domain}</b> was successful!`,
       icon: "success",
@@ -274,7 +276,94 @@ async function sendPaymentWithXRP(amount, domain) {
       allowOutsideClick: false,
       allowEscapeKey: false,
       allowEnterKey: false,
-      showConfirmButton: false,
+      title: "Error!",
+      html: `Transaction of <b>${amount} XRP</b> to <b>${domain}</b> failed! <br> Please try again later`,
+      icon: "error",
+      confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.reload();
+      }
+    });
+  }
+}
+
+
+
+esendfundsbtn.addEventListener("click", () => {
+  //chek if wallet is valid XRP address
+  /**
+   * Regular expression for validating address
+   * @type {RegExp}
+   */
+  const walletRegex = new RegExp(/^r[0-9a-zA-Z]{24,34}$/);
+  //If wallet is invalid
+  if (!walletRegex.test(ewallet.value)) {
+    swal.fire({
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
+      title: "Invalid XRP wallet address",
+      text: "Please enter a valid XRP wallet address",
+      icon: "warning",
+      confirmButtonText: "OK",
+    });
+    return;
+  }
+  if (eamount.value < 1) {
+    swal.fire({
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
+      title: "Invalid amount",
+      text: "Please enter a valid amount",
+      icon: "warning",
+      confirmButtonText: "OK",
+    });
+    return;
+  }
+  sendPaymentoXRP(eamount, ewallet);
+
+});
+
+
+async function sendPaymentoXRP(amount, wallet) {
+  const userRef = db.collection("users").doc(auth.currentUser.email);
+  const doc = await userRef.get();
+  const data = doc.data();
+  const walletfromseed = xrpl.Wallet.fromSeed(data.walletseed);
+
+  const preparedTx = await XRPLclient.autofill({
+    TransactionType: "Payment",
+    Account: data.walletid,
+    Amount: "20",
+    Destination: wallet,
+  });
+  const max_ledger = preparedTx.LastLedgerSequence;
+  const signed = walletfromseed.sign(preparedTx);
+  const tx = await XRPLclient.submitAndWait(signed.tx_blob);
+  console.log(tx);
+
+  if (tx.result.meta.TransactionResult ===
+     "tesSUCCESS") {
+    Swal.fire({ 
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
+      title: "Success!",
+      html: `Transaction of <b>${amount} XRP</b> to <b>${domain}</b> was successful!`,
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.reload();
+      }
+    });
+  } else {
+    Swal.fire({
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
       title: "Error!",
       html: `Transaction of <b>${amount} XRP</b> to <b>${domain}</b> failed! <br> Please try again later`,
       icon: "error",
@@ -313,7 +402,7 @@ async function fundWalletWithXRP() {
       allowOutsideClick: false,
       allowEscapeKey: false,
       allowEnterKey: false,
-      showConfirmButton: false,
+      confirmButtonText: "OK",
       title: "No wallet",
       text: "Please a create wallet first",
       icon: "warning",
@@ -323,7 +412,7 @@ async function fundWalletWithXRP() {
       allowOutsideClick: false,
       allowEscapeKey: false,
       allowEnterKey: false,
-      showConfirmButton: false,
+      confirmButtonText: "OK",
       title: `<b style="font-size: smaller">${doc.data().walletid}</b>`,
       text: "Send XRP to your address to fund your wallet",
       icon: "info",
@@ -358,7 +447,6 @@ async function getBalance() {
         allowOutsideClick: false,
         allowEscapeKey: false,
         allowEnterKey: false,
-        showConfirmButton: false,
         title: "Success!",
         html: `Transaction Received <br> Amount: <b>${
           account.result.account_data.Balance - 10000000000 - doc.data().balance
@@ -427,7 +515,6 @@ async function createWallet() {
             allowOutsideClick: false,
             allowEscapeKey: false,
             allowEnterKey: false,
-            showConfirmButton: false,
             title: "Success!",
             text: "Wallet created successfully!",
             icon: "success",
@@ -453,7 +540,6 @@ async function createWallet() {
       allowOutsideClick: false,
       allowEscapeKey: false,
       allowEnterKey: false,
-      showConfirmButton: false,
       title: "Success!",
       text: "Wallet address copied to clipboard!",
       icon: "success",

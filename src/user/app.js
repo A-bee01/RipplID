@@ -58,10 +58,10 @@ searchdomain.addEventListener("submit", (e) => {
       allowOutsideClick: false,
       allowEscapeKey: false,
       allowEnterKey: false,
-      showConfirmButton: false,
       title: "Invalid domain",
       text: "Please enter a valid domain, only .ppl domains are allowed",
       icon: "warning",
+      confirmButtonText: "OK",
     });
     return;
   }
@@ -119,7 +119,6 @@ XRP for the domain. */
             allowOutsideClick: false,
             allowEscapeKey: false,
             allowEnterKey: false,
-            showConfirmButton: false,
             title: "Domain available",
             html: `<b>${domain}</b> <br> Amount: <b>10 XRP + 2 XRP Fee</b>`,
             icon: "info",
@@ -133,7 +132,6 @@ XRP for the domain. */
                 allowEnterKey: false,
                 showConfirmButton: false,
                 title: "Please wait...",
-                showConfirmButton: false,
                 willOpen: () => {
                   Swal.showLoading();
                 },
@@ -147,7 +145,7 @@ XRP for the domain. */
                   allowOutsideClick: false,
                   allowEscapeKey: false,
                   allowEnterKey: false,
-                  showConfirmButton: false,
+                  confirmButtonText: "OK",
                   title: "No wallet",
                   text: "Please a create wallet first",
                   icon: "warning",
@@ -157,7 +155,7 @@ XRP for the domain. */
                   allowOutsideClick: false,
                   allowEscapeKey: false,
                   allowEnterKey: false,
-                  showConfirmButton: false,
+                  confirmButtonText: "OK",
                   title: "Insufficient funds",
                   text: "Please fund your wallet",
                   icon: "warning",
@@ -175,7 +173,7 @@ XRP for the domain. */
           allowOutsideClick: false,
           allowEscapeKey: false,
           allowEnterKey: false,
-          showConfirmButton: false,
+          confirmButtonText: "OK",
           title: "Domain Already Taken",
           html: `<b>${domain}</b> <br> This domain has already been registered by <b>${data.walletid}</b>`,
           icon: "info",
@@ -200,7 +198,7 @@ async function makePaymentWithXRP(amount, domain) {
       allowOutsideClick: false,
       allowEscapeKey: false,
       allowEnterKey: false,
-      showConfirmButton: false,
+      confirmButtonText: "OK",
       title: "No wallet",
       text: "Please a create wallet first",
       icon: "warning",
@@ -230,7 +228,6 @@ async function makePaymentWithXRP(amount, domain) {
             allowEnterKey: false,
             showConfirmButton: false,
             title: "Finalizing...",
-            showConfirmButton: false,
             willOpen: () => {
               Swal.showLoading();
             },
@@ -301,6 +298,7 @@ provides instructions to send XRP to the user's address to fund the wallet. */
       allowEscapeKey: false,
       allowEnterKey: false,
       showConfirmButton: false,
+      confirmButtonText: "OK",
       title: "No wallet",
       text: "Please a create wallet first",
       icon: "warning",
@@ -310,7 +308,7 @@ provides instructions to send XRP to the user's address to fund the wallet. */
       allowOutsideClick: false,
       allowEscapeKey: false,
       allowEnterKey: false,
-      showConfirmButton: false,
+      confirmButtonText: "OK",
       title: `<b style="font-size: smaller">${doc.data().walletid}</b>`,
       text: "Send XRP to your address to fund your wallet",
       icon: "info",
@@ -345,7 +343,6 @@ swal.fire() function, updates the balance in the userRef object, adds a new tran
         allowOutsideClick: false,
         allowEscapeKey: false,
         allowEnterKey: false,
-        showConfirmButton: false,
         title: "Success!",
         html: `Transaction Received <br> Amount: <b>${
           account.result.account_data.Balance - 10000000000 - doc.data().balance
@@ -414,7 +411,6 @@ async function createWallet() {
             allowOutsideClick: false,
             allowEscapeKey: false,
             allowEnterKey: false,
-            showConfirmButton: false,
             title: "Success!",
             text: "Wallet created successfully!",
             icon: "success",
@@ -440,7 +436,6 @@ async function createWallet() {
       allowOutsideClick: false,
       allowEscapeKey: false,
       allowEnterKey: false,
-      showConfirmButton: false,
       title: "Success!",
       text: "Wallet address copied to clipboard!",
       icon: "success",

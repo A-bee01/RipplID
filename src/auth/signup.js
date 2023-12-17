@@ -32,7 +32,6 @@ function handleSignUp() {
     allowEnterKey: false,
     showConfirmButton: false,
     title: "Please wait...",
-    showConfirmButton: false,
     willOpen: () => {
       Swal.showLoading();
     },
@@ -198,7 +197,6 @@ function addUserToFirestore(user) {
             allowOutsideClick: false,
             allowEscapeKey: false,
             allowEnterKey: false,
-            showConfirmButton: false,
             title: "Success!",
             text: "You have successfully registered!",
             icon: "success",
@@ -210,7 +208,6 @@ function addUserToFirestore(user) {
             allowOutsideClick: false,
             allowEscapeKey: false,
             allowEnterKey: false,
-            showConfirmButton: false,
             title: "Success!",
             text: "You have successfully registered!\nPlease verify your email to login",
             icon: "success",

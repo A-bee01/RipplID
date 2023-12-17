@@ -50,20 +50,20 @@ import {
         allowOutsideClick: false,
         allowEscapeKey: false,
         allowEnterKey: false,
-        showConfirmButton: false,
         title: "No wallet",
         text: "Please a create wallet first",
         icon: "warning",
+        confirmButtonText: "OK",
       });
     } else {
       swal.fire({
         allowOutsideClick: false,
         allowEscapeKey: false,
         allowEnterKey: false,
-        showConfirmButton: false,
         title: `<b style="font-size: smaller">${doc.data().walletid}</b>`,
         text: "Send XRP to your address to fund your wallet",
         icon: "info",
+        confirmButtonText: "OK",
       });
     }
   }
@@ -86,7 +86,6 @@ import {
           allowOutsideClick: false,
           allowEscapeKey: false,
           allowEnterKey: false,
-          showConfirmButton: false,
           title: "Success!",
           html: `Transaction Received <br> Amount: <b>${
             account.result.account_data.Balance - 10000000000 - doc.data().balance
@@ -172,7 +171,6 @@ import {
         allowOutsideClick: false,
         allowEscapeKey: false,
         allowEnterKey: false,
-        showConfirmButton: false,
         title: "Success!",
         text: "Wallet address copied to clipboard!",
         icon: "success",
