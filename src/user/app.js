@@ -208,6 +208,7 @@ async function makePaymentWithXRP(amount, domain) {
               domain: domain,
               email: auth.currentUser.email,
               date: new Date(),
+              walletid: doc.data().walletid,
             })
             .then(() => {
               //deduct 10 xrp from user balance
