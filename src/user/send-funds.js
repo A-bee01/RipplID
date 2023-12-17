@@ -72,6 +72,10 @@ sendfundsbtn.addEventListener("click", () => {
   //If domain is invalid
   if (!domainRegex.test(ripplidname.value)) {
     swal.fire({
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
+      showConfirmButton: false,
       title: "Invalid domain",
       text: "Please enter a valid domain name, only .ppl domains are allowed",
       icon: "warning",
@@ -80,6 +84,10 @@ sendfundsbtn.addEventListener("click", () => {
   }
   if (amount.value < 1) {
     swal.fire({
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
+      showConfirmButton: false,
       title: "Invalid amount",
       text: "Please enter a valid amount",
       icon: "warning",
@@ -143,6 +151,10 @@ async function searchAndFetchUser(domain) {
                 querySnapshot.docs[0].data().email === auth.currentUser.email
               ) {
                 Swal.fire({
+                  allowOutsideClick: false,
+                  allowEscapeKey: false,
+                  allowEnterKey: false,
+                  showConfirmButton: false,
                   title: "Action not allowed",
                   html: `You cannot send funds to yourself. <br> Please enter a valid domain name`,
                   icon: "warning",
@@ -157,6 +169,10 @@ async function searchAndFetchUser(domain) {
 
               if (data.walletid == null) {
                 Swal.fire({
+                  allowOutsideClick: false,
+                  allowEscapeKey: false,
+                  allowEnterKey: false,
+                  showConfirmButton: false,
                   title: "No wallet",
                   html: `Please create a wallet first`,
                   icon: "warning",
@@ -171,6 +187,10 @@ async function searchAndFetchUser(domain) {
 
               if (amount.value > data.balance) {
                 Swal.fire({
+                  allowOutsideClick: false,
+                  allowEscapeKey: false,
+                  allowEnterKey: false,
+                  showConfirmButton: false,
                   title: "Insufficient funds",
                   html: `You have insufficient funds to make this payment. <br> Please fund your wallet and try again`,
                   icon: "warning",
@@ -228,6 +248,10 @@ async function sendPaymentWithXRP(amount, domain) {
   if (tx.result.meta.TransactionResult ===
      "tesSUCCESS") {
     Swal.fire({ 
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
+      showConfirmButton: false,
       title: "Success!",
       html: `Transaction of <b>${amount} XRP</b> to <b>${domain}</b> was successful!`,
       icon: "success",
@@ -239,6 +263,10 @@ async function sendPaymentWithXRP(amount, domain) {
     });
   } else {
     Swal.fire({
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
+      showConfirmButton: false,
       title: "Error!",
       html: `Transaction of <b>${amount} XRP</b> to <b>${domain}</b> failed! <br> Please try again later`,
       icon: "error",
@@ -274,12 +302,20 @@ async function fundWalletWithXRP() {
   const doc = await userRef.get();
   if (doc.data().walletid == null) {
     swal.fire({
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
+      showConfirmButton: false,
       title: "No wallet",
       text: "Please a create wallet first",
       icon: "warning",
     });
   } else {
     swal.fire({
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
+      showConfirmButton: false,
       title: `<b style="font-size: smaller">${doc.data().walletid}</b>`,
       text: "Send XRP to your address to fund your wallet",
       icon: "info",
@@ -311,6 +347,10 @@ async function getBalance() {
       doc.data().balance
     ) {
       swal.fire({
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        showConfirmButton: false,
         title: "Success!",
         html: `Transaction Received <br> Amount: <b>${
           account.result.account_data.Balance - 10000000000 - doc.data().balance
@@ -398,6 +438,10 @@ async function createWallet() {
     document.execCommand("copy");
     document.body.removeChild(el);
     swal.fire({
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
+      showConfirmButton: false,
       title: "Success!",
       text: "Wallet address copied to clipboard!",
       icon: "success",

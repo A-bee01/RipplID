@@ -27,6 +27,10 @@ function handleSignUp() {
     e.preventDefault();
   });
   Swal.fire({
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
+    showConfirmButton: false,
     title: "Please wait...",
     showConfirmButton: false,
     willOpen: () => {
