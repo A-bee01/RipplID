@@ -159,6 +159,20 @@ async function searchAndFetchUser(domain) {
                     return;
                 }
 
+                if (data.walletid == null) {
+                    Swal.fire({
+                        title: "No wallet",
+                        html: `Please create a wallet first`,
+                        icon: "warning",
+                        confirmButtonText: "OK",
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.close();
+                        }
+                    });
+                    return;
+                }
+
 
               if (amount.value > data.balance) {
                 Swal.fire({
@@ -177,80 +191,78 @@ async function searchAndFetchUser(domain) {
               Swal.fire({
                 title: "Please wait...",
                 html: `Processing payment of <b>${amount.value} XRP</b> to <b>${domain}</b>`,
+                icon: "info",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
                 showConfirmButton: false,
                 willOpen: () => {
                   Swal.showLoading();
                 },
               });
-              makePaymentWithXRP(amount.value, domain);
+              await sendPaymentWithXRP(amount.value, domain);
             }
           });
       }
     });
 }
 
-/**
- * Makes a payment with XRP.
- * @param {number} amount - The amount of XRP to be paid.
- * @param {string} domain - The domain to be registered.
- * @returns {Promise<void>} - A promise that resolves when the payment is successful.
- */
-async function makePaymentWithXRP(amount, domain) {
+
+async function sendPaymentWithXRP(amount, domain) {
   const domainRef = db.collection("domains");
   const userRef = db.collection("users").doc(auth.currentUser.email);
+  const domainDoc = await domainRef.where("domain", "==", domain).get();
+  const receiverRef = db.collection("users").doc(domainDoc.docs[0].data().email);
+  const receiverDoc = await receiverRef.get();
   const doc = await userRef.get();
   const data = doc.data();
-  const payment = await XRPLclient.makePayment(
-    data.walletid,
-    data.walletsk,
-    domain,
-    amount
-  );
-  console.log(payment);
-  if (payment.resultCode === "tesSUCCESS") {
-    Swal.fire({
-      title: "Payment successful",
-      html: `Payment of <b>${amount} XRP</b> to <b>${domain}</b> was successful`,
-      icon: "success",
-      confirmButtonText: "OK",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.close();
-      }
-    });
-    //add to domain collection
-    domainRef.add({
-      domain: domain,
-      email: auth.currentUser.email,
-      date: new Date(),
-      transactionhash: payment.result.tx_json.hash,
-    });
-    //add to transaction history
-    db.collection("transactions").add({
-      amount: amount,
-      date: new Date(),
-      type: "Domain Registration",
-      email: auth.currentUser.email,
-      trasactionhash: payment.result.tx_json.hash,
-    });
-    //update balance
-    userRef.update({
-      balance: data.balance - amount,
-    });
-    //update balance on page
-    balance.textContent = data.balance - amount;
-  } else {
-    Swal.fire({
-      title: "Payment failed",
-      html: `Payment of <b>${amount} XRP</b> to <b>${domain}</b> failed`,
-      icon: "error",
-      confirmButtonText: "OK",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.close();
-      }
-    });
-  }
+  const walletfromseed = xrpl.Wallet.fromSeed(receiverDoc.data().walletseed);
+
+  const preparedTx = await XRPLclient.autofill({
+    TransactionType: "Payment",
+    Account: data.walletid,
+    Amount: xrpl.xrpToDrops(amount * 1000000),
+    Destination: walletfromseed.address,
+    flags: 2147483648,
+  });
+  const max_ledger = preparedTx.LastLedgerSequence;
+  const signed = walletfromseed.sign(preparedTx);
+  const tx = await XRPLclient.submitAndWait(signed.tx_blob);
+    console.log(tx);
+        Swal.fire({
+            title: "Success!",
+            html: `Payment of <b>${amount} XRP</b> to <b>${domain}</b> was successful.`,
+            icon: "success",
+            confirmButtonText: "OK",
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.close();
+                //ad to transaction history
+                db.collection("transactions").add({
+                    amount: amount,
+                    date: new Date(),
+                    type: "Payment",
+                    email: auth.currentUser.email,
+                    trasactionhash: tx.result.tx_json.hash,
+                });
+                //update balance
+                userRef.update({
+                    balance: data.balance - amount,
+                });
+                //update balance
+                receiverDoc.update({
+                    balance: receiverDoc.data().balance + amount,
+                });
+                //update domain
+                domainRef.doc(domainDoc.docs[0].id).update({
+                    email: auth.currentUser.email,
+                });
+                window.location.reload();
+            }
+        });
+
+
+
 }
 
 /**
