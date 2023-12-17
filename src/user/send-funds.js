@@ -144,35 +144,36 @@ async function searchAndFetchUser(domain) {
           })
           .then(async (result) => {
             if (result.isConfirmed) {
-             //if user owns the domain
-                if (querySnapshot.docs[0].data().email === auth.currentUser.email) {
-                    Swal.fire({
-                        title: "Action not allowed",
-                        html: `You cannot send funds to yourself. <br> Please enter a valid domain name`,
-                        icon: "warning",
-                        confirmButtonText: "OK",
-                        }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.close();
-                        }
-                    });
-                    return;
-                }
+              //if user owns the domain
+              if (
+                querySnapshot.docs[0].data().email === auth.currentUser.email
+              ) {
+                Swal.fire({
+                  title: "Action not allowed",
+                  html: `You cannot send funds to yourself. <br> Please enter a valid domain name`,
+                  icon: "warning",
+                  confirmButtonText: "OK",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    Swal.close();
+                  }
+                });
+                return;
+              }
 
-                if (data.walletid == null) {
-                    Swal.fire({
-                        title: "No wallet",
-                        html: `Please create a wallet first`,
-                        icon: "warning",
-                        confirmButtonText: "OK",
-                        }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.close();
-                        }
-                    });
-                    return;
-                }
-
+              if (data.walletid == null) {
+                Swal.fire({
+                  title: "No wallet",
+                  html: `Please create a wallet first`,
+                  icon: "warning",
+                  confirmButtonText: "OK",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    Swal.close();
+                  }
+                });
+                return;
+              }
 
               if (amount.value > data.balance) {
                 Swal.fire({
@@ -207,12 +208,13 @@ async function searchAndFetchUser(domain) {
     });
 }
 
-
 async function sendPaymentWithXRP(amount, domain) {
   const domainRef = db.collection("domains");
   const userRef = db.collection("users").doc(auth.currentUser.email);
   const domainDoc = await domainRef.where("domain", "==", domain).get();
-  const receiverRef = db.collection("users").doc(domainDoc.docs[0].data().email);
+  const receiverRef = db
+    .collection("users")
+    .doc(domainDoc.docs[0].data().email);
   const receiverDoc = await receiverRef.get();
   const doc = await userRef.get();
   const data = doc.data();
@@ -226,49 +228,49 @@ async function sendPaymentWithXRP(amount, domain) {
   });
   const max_ledger = preparedTx.LastLedgerSequence;
   const signed = walletfromseed.sign(preparedTx);
-  const tx = await XRPLclient.submit(signed.tx_blob);
-    console.log(tx);
-  
-    if (tx.resultCode === "tesSUCCESS") {
-        Swal.fire({
-            title: "Success!",
-            html: `Payment of <b>${amount} XRP</b> to <b>${domain}</b> was successful!`,
-            icon: "success",
-            confirmButtonText: "OK",
-            }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.close();
-            }
-        });
-        //update balance
-        userRef.update({
-            balance: data.balance - amount * 1000000,
-        });
-        receiverRef.update({
-            balance: receiverDoc.data().balance + amount * 1000000,
-        });
-        //add to transaction history
-        db.collection("transactions").add({
-            amount: amount * 1000000,
-            date: new Date(),
-            type: "Payment",
-            email: auth.currentUser.email,
-            trasactionhash: tx.result.tx_json.hash,
-        });
-        balance.textContent = data.balance - amount * 1000000;
-    } else {
-        Swal.fire({
-            title: "Error!",
-            html: `Payment of <b>${amount} XRP</b> to <b>${domain}</b> failed! <br> Please try again later`,
-            icon: "error",
-            confirmButtonText: "OK",
-            }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.close();
-            }
-        });
-    }
+  const tx = await XRPLclient.submitAndWait(signed.tx_blob);
+  console.log(tx);
 
+  if (tx.resultCode ===
+     "tesSUCCESS") {
+    Swal.fire({ 
+      title: "Success!",
+      html: `Payment of <b>${amount} XRP</b> to <b>${domain}</b> was successful!`,
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.close();
+      }
+    });
+    //update balance
+    userRef.update({
+      balance: data.balance - amount * 1000000,
+    });
+    receiverRef.update({
+      balance: receiverDoc.data().balance + amount * 1000000,
+    });
+    //add to transaction history
+    db.collection("transactions").add({
+      amount: amount * 1000000,
+      date: new Date(),
+      type: "Payment",
+      email: auth.currentUser.email,
+      trasactionhash: tx.result.tx_json.hash,
+    });
+    balance.textContent = data.balance - amount * 1000000;
+  } else {
+    Swal.fire({
+      title: "Error!",
+      html: `Payment of <b>${amount} XRP</b> to <b>${domain}</b> failed! <br> Please try again later`,
+      icon: "error",
+      confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.close();
+      }
+    });
+  }
 }
 
 /**
