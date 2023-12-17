@@ -303,7 +303,7 @@ swal.fire() function, updates the balance in the userRef object, adds a new tran
     ) {
       swal.fire({
         title: "Success!",
-        html: `Account Successfully Funded! <br> Amount: <b>${
+        html: `Transaction Received <br> Amount: <b>${
           account.result.account_data.Balance - 10000000000 - doc.data().balance
         } XRP</b>`,
         icon: "success",

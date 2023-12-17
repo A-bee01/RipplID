@@ -76,7 +76,7 @@ import {
       ) {
         swal.fire({
           title: "Success!",
-          html: `Account Successfully Funded! <br> Amount: <b>${
+          html: `Transaction Received <br> Amount: <b>${
             account.result.account_data.Balance - 10000000000 - doc.data().balance
           } XRP</b>`,
           icon: "success",

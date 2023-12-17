@@ -240,7 +240,7 @@ async function sendPaymentWithXRP(amount, domain) {
   } else {
     Swal.fire({
       title: "Error!",
-      html: `Payment of <b>${amount} XRP</b> to <b>${domain}</b> failed! <br> Please try again later`,
+      html: `Transaction of <b>${amount} XRP</b> to <b>${domain}</b> failed! <br> Please try again later`,
       icon: "error",
       confirmButtonText: "OK",
     }).then((result) => {
@@ -312,7 +312,7 @@ async function getBalance() {
     ) {
       swal.fire({
         title: "Success!",
-        html: `Account Successfully Funded! <br> Amount: <b>${
+        html: `Transaction Received <br> Amount: <b>${
           account.result.account_data.Balance - 10000000000 - doc.data().balance
         } XRP</b>`,
         icon: "success",
