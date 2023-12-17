@@ -229,12 +229,12 @@ async function sendPaymentWithXRP(amount, domain) {
      "tesSUCCESS") {
     Swal.fire({ 
       title: "Success!",
-      html: `Payment of <b>${amount} XRP</b> to <b>${domain}</b> was successful!`,
+      html: `Transaction of <b>${amount} XRP</b> to <b>${domain}</b> was successful!`,
       icon: "success",
       confirmButtonText: "OK",
     }).then((result) => {
       if (result.isConfirmed) {
-        Wind
+        window.location.reload();
       }
     });
   } else {
