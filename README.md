@@ -2,7 +2,7 @@
 
 <div align="center">
     <h1>RipplID</h1>
-    <h3>A naming service for the XRP Ledger.</h3>
+    <h3>A naming service built on the XRP Ledger.</h3>
     <h3>◦ Developed with the software and tools below.</h3>
 </div>
 
@@ -22,7 +22,6 @@
 - [🚀 Getting Started](#-getting-started)
     - [🔧 Installation](#-installation)
     - [🤖 Running RipplID](#-running-RipplID)
-- [🛣 Roadmap](#-roadmap)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 - [👏 Acknowledgments](#-acknowledgments)
@@ -110,7 +109,7 @@ Please ensure you have the following dependencies installed on your system:
 
 1. Clone the RipplID repository:
 ```sh
-git clone https://github.com/emejulucodes/RipplID
+git clone https://github.com/Tech-Girl1/RipplID
 ```
 
 2. Change to the project directory:
@@ -133,23 +132,13 @@ run npm install
 ► On vscode, open the index.html file and click the "Go Live" button on the bottom right corner.
 ```
 
-
-## 🛣 Project Roadmap
-
-> - [X] `ℹ️  Task 1: Implement X`
-> - [ ] `ℹ️  Task 2: Implement Y`
-> - [ ] `ℹ️ ...`
-
-
----
-
 ## 🤝 Contributing
 
 Contributions are welcome! Here are several ways you can contribute:
 
-- **[Submit Pull Requests](https://github.com/emejulucodes/RipplID/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
-- **[Join the Discussions](https://github.com/emejulucodes/RipplID/discussions)**: Share your insights, provide feedback, or ask questions.
-- **[Report Issues](https://github.com/emejulucodes/RipplID/issues)**: Submit bugs found or log feature requests for EMEJULUCODES.
+- **[Submit Pull Requests](https://github.com/Tech-Girl1/RipplID/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
+- **[Join the Discussions](https://github.com/Tech-Girl1/RipplID/discussions)**: Share your insights, provide feedback, or ask questions.
+- **[Report Issues](https://github.com/Tech-Girl1/RipplID/issues)**: Submit bugs found or log feature requests for Tech-Girl1.
 
 #### *Contributing Guidelines*
 
