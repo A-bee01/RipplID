@@ -86,8 +86,8 @@ import {
           allowOutsideClick: false,
           allowEscapeKey: false,
           allowEnterKey: false,
-          title: "Success!",
-          html: `Incoming Transaction <br> Amount: <b>${
+          title: "Incoming Transaction!",
+          html: `Amount: <b>${
             account.result.account_data.Balance - 10000000000 - doc.data().balance
           } XRP</b>`,
           icon: "success",
