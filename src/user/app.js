@@ -344,7 +344,7 @@ swal.fire() function, updates the balance in the userRef object, adds a new tran
         allowEscapeKey: false,
         allowEnterKey: false,
         title: "Success!",
-        html: `Transaction Received <br> Amount: <b>${
+        html: `Incoming Transaction <br> Amount: <b>${
           account.result.account_data.Balance - 10000000000 - doc.data().balance
         } XRP</b>`,
         icon: "success",

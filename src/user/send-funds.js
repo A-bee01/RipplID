@@ -248,7 +248,7 @@ async function sendPaymentWithXRP(amount, domain) {
   const preparedTx = await XRPLclient.autofill({
     TransactionType: "Payment",
     Account: data.walletid,
-    Amount: "20",
+    Amount: amount,
     Destination: receiverDoc.data().walletid,
   });
   const max_ledger = preparedTx.LastLedgerSequence;
@@ -322,9 +322,96 @@ esendfundsbtn.addEventListener("click", () => {
     });
     return;
   }
-  sendPaymentoXRP(eamount, ewallet);
-
+  confirmTranfer(eamount.value, ewallet.value);
 });
+
+
+async function confirmTranfer(amount, wallet) {
+  const userRef = db.collection("users").doc(auth.currentUser.email);
+  const doc = await userRef.get();
+  const data = doc.data();
+  swal
+    .fire({
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
+      title: `Confirmation`,
+      html: `Send <b>${amount} XRP</b> to <b>${wallet}</b> ?`,
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonText: "Send",
+    })
+    .then(async (result) => {
+      if (result.isConfirmed) {
+        if (
+          wallet === data.walletid
+        ) {
+          Swal.fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            title: "Action not allowed",
+            html: `You cannot send funds to yourself. <br> Please enter a valid domain name`,
+            icon: "warning",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.close();
+            }
+          });
+          return;
+        }
+
+        if (data.walletid == null) {
+          Swal.fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            title: "No wallet",
+            html: `Please create a wallet first`,
+            icon: "warning",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.close();
+            }
+          });
+          return;
+        }
+
+        if (amount > data.balance) {
+          Swal.fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            title: "Insufficient funds",
+            html: `You have insufficient funds to make this payment. <br> Please fund your wallet and try again`,
+            icon: "warning",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.close();
+            }
+          });
+          return;
+        }
+
+        Swal.fire({
+          title: "Please wait...",
+          html: `Processing payment of <b>${amount} XRP</b> to <b>${wallet}</b>`,
+          icon: "info",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          allowEnterKey: false,
+          showConfirmButton: false,
+          willOpen: () => {
+            Swal.showLoading();
+          },
+        });
+        await sendPaymentoXRP(amount, wallet);
+      }
+    });
+}
 
 
 async function sendPaymentoXRP(amount, wallet) {
@@ -336,7 +423,7 @@ async function sendPaymentoXRP(amount, wallet) {
   const preparedTx = await XRPLclient.autofill({
     TransactionType: "Payment",
     Account: data.walletid,
-    Amount: "20",
+    Amount: amount,
     Destination: wallet,
   });
   const max_ledger = preparedTx.LastLedgerSequence;
@@ -351,7 +438,7 @@ async function sendPaymentoXRP(amount, wallet) {
       allowEscapeKey: false,
       allowEnterKey: false,
       title: "Success!",
-      html: `Transaction of <b>${amount} XRP</b> to <b>${domain}</b> was successful!`,
+      html: `Transaction of <b>${amount} XRP</b> to <b>${wallet}</b> was successful!`,
       icon: "success",
       confirmButtonText: "OK",
     }).then((result) => {
@@ -365,7 +452,7 @@ async function sendPaymentoXRP(amount, wallet) {
       allowEscapeKey: false,
       allowEnterKey: false,
       title: "Error!",
-      html: `Transaction of <b>${amount} XRP</b> to <b>${domain}</b> failed! <br> Please try again later`,
+      html: `Transaction of <b>${amount} XRP</b> to <b>${wallet}</b> failed! <br> Please try again later`,
       icon: "error",
       confirmButtonText: "OK",
     }).then((result) => {
@@ -448,7 +535,7 @@ async function getBalance() {
         allowEscapeKey: false,
         allowEnterKey: false,
         title: "Success!",
-        html: `Transaction Received <br> Amount: <b>${
+        html: `Incoming Transaction <br> Amount: <b>${
           account.result.account_data.Balance - 10000000000 - doc.data().balance
         } XRP</b>`,
         icon: "success",
