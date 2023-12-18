@@ -452,7 +452,7 @@ async function sendPaymentoXRP(amount, wallet) {
       allowEscapeKey: false,
       allowEnterKey: false,
       title: "Error!",
-      html: `Transaction of <b>${amount} XRP</b> to <b>${wallet}</b> failed! <br> Please try again later`,
+      html: `Transaction of <b>${amount} XRP</b> to <b>${wallet}</b> failed! <br> Error Code: ${tx.result.meta.TransactionResult}`,
       icon: "error",
       confirmButtonText: "OK",
     }).then((result) => {
