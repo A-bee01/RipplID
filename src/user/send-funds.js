@@ -203,7 +203,7 @@ async function searchAndFetchUser(domain) {
                   allowEscapeKey: false,
                   allowEnterKey: false,
                   title: "Insufficient funds",
-                  html: `You have insufficient funds to make this payment. <br> Please fund your wallet and try again`,
+                  html: `You have insufficient funds to make this transaction. <br> Please fund your wallet and try again`,
                   icon: "warning",
                   confirmButtonText: "OK",
                 }).then((result) => {
@@ -216,7 +216,7 @@ async function searchAndFetchUser(domain) {
 
               Swal.fire({
                 title: "Please wait...",
-                html: `Processing payment of <b>${amount.value} XRP</b> to <b>${domain}</b>`,
+                html: `Processing transaction of <b>${amount.value} XRP</b> to <b>${domain}</b>`,
                 icon: "info",
                 allowOutsideClick: false,
                 allowEscapeKey: false,
@@ -385,7 +385,7 @@ async function confirmTranfer(amount, wallet) {
             allowEscapeKey: false,
             allowEnterKey: false,
             title: "Insufficient funds",
-            html: `You have insufficient funds to make this payment. <br> Please fund your wallet and try again`,
+            html: `You have insufficient funds to make this transaction. <br> Please fund your wallet and try again`,
             icon: "warning",
             confirmButtonText: "OK",
           }).then((result) => {
@@ -398,7 +398,7 @@ async function confirmTranfer(amount, wallet) {
 
         Swal.fire({
           title: "Please wait...",
-          html: `Processing payment of <b>${amount} XRP</b> to <b>${wallet}</b>`,
+          html: `Processing transaction of <b>${amount} XRP</b> to <b>${wallet}</b>`,
           icon: "info",
           allowOutsideClick: false,
           allowEscapeKey: false,
