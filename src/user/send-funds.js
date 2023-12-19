@@ -251,10 +251,10 @@ async function sendPaymentWithXRP(amount, domain) {
     Amount: amount,
     Destination: receiverDoc.data().walletid,
   });
+
   const max_ledger = preparedTx.LastLedgerSequence;
   const signed = walletfromseed.sign(preparedTx);
   const tx = await XRPLclient.submitAndWait(signed.tx_blob);
-  console.log(tx);
 
   if (tx.result.meta.TransactionResult ===
      "tesSUCCESS") {
@@ -419,7 +419,6 @@ async function sendPaymentoXRP(amount, wallet) {
   const doc = await userRef.get();
   const data = doc.data();
   const walletfromseed = xrpl.Wallet.fromSeed(data.walletseed);
-
   const preparedTx = await XRPLclient.autofill({
     TransactionType: "Payment",
     Account: data.walletid,
@@ -429,7 +428,7 @@ async function sendPaymentoXRP(amount, wallet) {
   const max_ledger = preparedTx.LastLedgerSequence;
   const signed = walletfromseed.sign(preparedTx);
   const tx = await XRPLclient.submitAndWait(signed.tx_blob);
-  console.log(tx);
+
 
   if (tx.result.meta.TransactionResult ===
      "tesSUCCESS") {
@@ -534,6 +533,7 @@ async function getBalance() {
         allowOutsideClick: false,
         allowEscapeKey: false,
         allowEnterKey: false,
+                icon: "info",
         title: "Incoming Transaction!",
         html: `Amount: <b>${
           account.result.account_data.Balance - 10000000000 - doc.data().balance

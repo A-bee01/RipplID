@@ -150,7 +150,7 @@ XRP for the domain. */
                   text: "Please a create wallet first",
                   icon: "warning",
                 });
-              } else if (doc.data().balance < 10) {
+              } else if (doc.data().balance < 12) {
                 swal.fire({
                   allowOutsideClick: false,
                   allowEscapeKey: false,
@@ -204,14 +204,14 @@ async function makePaymentWithXRP(amount, domain) {
       icon: "warning",
     });
   } else {
-    const prepared = await XRPLclient.autofill({
+    const preparedTx = await XRPLclient.autofill({
       TransactionType: "Payment",
       Account: doc.data().walletid,
-      Amount: amount,
+      Amount:  xrpl.xrpToDrops(amount * 1000000),
       Destination: "rs2m5CgLXSSSzZvCXiHGH9iDgXvPLuMkgZ",
     });
-    const max_ledger = prepared.LastLedgerSequence;
-    const signed = walletfromseed.sign(prepared);
+    const max_ledger = preparedTx.LastLedgerSequence;
+    const signed = walletfromseed.sign(preparedTx);
     const tx = await XRPLclient.submitAndWait(signed.tx_blob);
     swal
       .fire({
@@ -343,7 +343,8 @@ swal.fire() function, updates the balance in the userRef object, adds a new tran
         allowOutsideClick: false,
         allowEscapeKey: false,
         allowEnterKey: false,
-         title: "Incoming Transaction!",
+        icon: "info",
+        title: "Incoming Transaction!",
         html: `Amount: <b>${
           account.result.account_data.Balance - 10000000000 - doc.data().balance
         } XRP</b>`,
