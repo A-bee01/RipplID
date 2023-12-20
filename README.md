@@ -155,7 +155,7 @@ Contributions are welcome! Here are several ways you can contribute:
 1. **Fork the Repository**: Start by forking the project repository to your GitHub account.
 2. **Clone Locally**: Clone the forked repository to your local machine using a Git client.
    ```sh
-   git clone <your-forked-repo-url>
+   git clone https://github.com/Tech-Girl1/RipplID.git
    ```
 3. **Create a New Branch**: Always work on a new branch, giving it a descriptive name.
    ```sh
