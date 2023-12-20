@@ -151,8 +151,6 @@ Contributions are welcome! Here are several ways you can contribute:
 
 #### *Contributing Guidelines*
 
-<details closed>
-<summary>Click to expand</summary>
 
 1. **Fork the Repository**: Start by forking the project repository to your GitHub account.
 2. **Clone Locally**: Clone the forked repository to your local machine using a Git client.
@@ -176,7 +174,6 @@ Contributions are welcome! Here are several ways you can contribute:
 
 Once your PR is reviewed and approved, it will be merged into the main branch.
 
-</details>
 
 ---
 
