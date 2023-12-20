@@ -48,7 +48,7 @@ Demo Link :  **[https://ripplid.vercel.app](https://ripplid.vercel.app)**
 
 - **Enhanced User Experience**: `RipplID seeks to improve the user experience on the XRP Ledger by replacing complex wallet addresses with human-readable names. Users can register names like "YourName.xrp" or "YourBrand.xrp" and associate them with their XRPL wallet addresses.`
 - **Simplified Payments**: `RipplID will simplify payments on the XRPL. Instead of sharing lengthy addresses, users can send funds to friends or businesses using their unique RipplID names, making transactions more user-friendly.`
-- **Personal Branding**: `RipplID allows individuals, businesses, and content creators to establish their presence on the XRPL by registering names like "YourBrand.xrp" or "YourUsername.xrp." This enables personal branding and recognition within the XRPL community.`
+- **Personal Branding**: `RipplID allows individuals, businesses, and content creators to establish their presence on the XRPL by registering names like "YourBrand.ppl" or "YourUsername.ppl." This enables personal branding and recognition within the XRPL community.`
 - **Enhanced Security**: `RipplID will implement robust security measures to ensure the integrity of the naming system. Users will have control over their names and extensions, with options for multi-signature verification and domain management.`
 
 ---
