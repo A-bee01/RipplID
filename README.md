@@ -64,7 +64,6 @@ Demo Link :  **[https://ripplid.vercel.app](https://ripplid.vercel.app)**
     │   └── signup/
     │       └── index.html
     ├── bundle.js
-    ├── connect-wallet.html
     ├── index.html
     ├── src/
     │   ├── auth/
@@ -84,6 +83,8 @@ Demo Link :  **[https://ripplid.vercel.app](https://ripplid.vercel.app)**
     │   └── user/
     │       ├── account.js
     │       ├── app.js
+    │       ├── domains.js
+    │       ├── send-funds.js
     │       └── transactions.js
     ├── style.css
     ├── support.html
@@ -91,6 +92,10 @@ Demo Link :  **[https://ripplid.vercel.app](https://ripplid.vercel.app)**
         ├── account/
         │   └── index.html
         ├── dashboard/
+        │   └── index.html
+        ├── domains/
+        │   └── index.html
+        ├── send-funds/
         │   └── index.html
         └── transactions/
             └── index.html
